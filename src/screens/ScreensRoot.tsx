@@ -1,14 +1,12 @@
-import React from "react"
-import SignUpForm from "./User/Form/SignUpForm"
-
-
+import React from "react";
+import ScreenUserForm from "./User/Form/ScreenUserForm";
 
 function ScreensRoot() {
-    return (
-      <div className="App">
-        <SignUpForm/> 
-      </div>
-    );
-  }
-  
-  export default ScreensRoot;
+  return (
+    <div className="App">
+      <ScreenUserForm />
+    </div>
+  );
+}
+
+export default ScreensRoot;

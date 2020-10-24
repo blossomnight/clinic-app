@@ -1,8 +1,12 @@
-.sign-up-container {
-  border: 1px;
-  border-color: black;
+.sign-up-form {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  width: 50%;
+  position: relative;
+  padding: 0 10% 0 10%;
 }
 
-.sign-up-container-buttons {
+.sign-up-container-button {
   display: flexbox;
 }
