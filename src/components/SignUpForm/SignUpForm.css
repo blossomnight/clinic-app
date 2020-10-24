@@ -1,0 +1,8 @@
+.sign-up-container {
+  border: 1px;
+  border-color: black;
+}
+
+.sign-up-container-buttons {
+  display: flexbox;
+}
