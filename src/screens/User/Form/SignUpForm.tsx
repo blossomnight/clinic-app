@@ -1,7 +1,5 @@
 import React from "react";
 import "./SignUpForm.css";
-import CSS from "csstype";
-import { couldStartTrivia } from "typescript";
 
 enum UserType {
   None,
@@ -26,7 +24,6 @@ type SignUpFormState = {
   userSpecialization: string;
 };
 
-type SignUpFormProps = {};
 
 class SignUpForm extends React.Component {
   state: SignUpFormState = {
@@ -34,7 +31,7 @@ class SignUpForm extends React.Component {
     userEmail: "mali@gmail.com",
     userName: "Jan",
     userSurname: "User",
-    userPesel: "1209120",
+    userPesel: "12345654321",
     userPassword: "PASS",
     userRetypePassword: "PASS",
     userSpecialization: "None",
@@ -80,11 +77,10 @@ class SignUpForm extends React.Component {
   };
 
   handleInputChange = (event: React.ChangeEvent<HTMLFormElement>): void => {
-    this.setState({ [event.target.id]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleUserChoice = (event: React.MouseEvent): void => {
-    let headerData: string;
     let value: any = event.currentTarget.getAttribute("value");
     let userType: number = parseInt(value);
     this.setState({
@@ -110,14 +106,10 @@ class SignUpForm extends React.Component {
   };
 
   render() {
-    let headerStyle: CSS.Properties = {
-      transition: "width 2s",
-      color: "pink",
-    };
 
     return (
       <div className="sign-up-form">
-        <h3 style={headerStyle}>{this.getHeader()}</h3>
+        <h3>{this.getHeader()}</h3>
         {this.state.userType === UserType.None && (
           <div>
             <button
@@ -148,50 +140,51 @@ class SignUpForm extends React.Component {
               onSubmit={this.handleFormOnSubmit}
               onChange={this.handleInputChange}
             >
-              <label htmlFor="userEmail">Email:</label>
+              <span>Email:</span>
               <input
                 type="email"
                 defaultValue={this.state.userEmail}
-                id="userEmail"
+                name="userEmail"
               />
-              <label htmlFor="userName">Imię:</label>
+              <span>Imię:</span>
               <input
                 type="text"
                 defaultValue={this.state.userName}
-                id="userName"
+                name="userName"
               />
-              <label htmlFor="userSurname">Nazwisko:</label>
+              <span>Nazwisko:</span>
               <input
                 type="text"
                 defaultValue={this.state.userSurname}
-                id="userSurname"
+                name="userSurname"
               />
-              <label htmlFor="userPesel">PESEL:</label>
+              <span>PESEL:</span>
               <input
                 type="text"
                 defaultValue={this.state.userPesel}
-                id="userPesel"
+                name="userPesel"
+                minLength={11}
                 maxLength={11}
               />
-              <label htmlFor="userPassword">Hasło:</label>
+              <span>Hasło:</span>
               <input
                 type="password"
                 defaultValue={this.state.userPassword}
-                id="userPassword"
+                name="userPassword"
               />
-              <label htmlFor="userRetypePassword">Powtórz hasło:</label>
+              <span>Powtórz hasło:</span>
               <input
                 type="password"
                 defaultValue={this.state.userRetypePassword}
-                id="userRetypePassword"
+                name="userRetypePassword"
               />
               {this.state.userType === UserType.Doctor && (
                 <div>
-                  <label htmlFor="userSpecialization">Specjalizacja:</label>
+                  <span>Specjalizacja:</span>
                   <input
                     type="text"
                     defaultValue={this.state.userSpecialization}
-                    id="userSpecialization"
+                    name="userSpecialization"
                   />
                 </div>
               )}

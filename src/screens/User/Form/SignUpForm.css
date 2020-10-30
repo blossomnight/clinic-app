@@ -1,4 +1,4 @@
-.sign-up-form{
+.sign-up-form {
   display: flex;
   flex-flow: column;
   align-items: stretch;
@@ -6,12 +6,19 @@
   position: relative;
 }
 
+.sign-up-form h3 {
+  transition: width 2s;
+  color: pink;
+}
+
 .sign-up-form div {
   padding: 0 25% 0 25%;
   max-width: 280px;
 }
 
-.sign-up-form input[type="text"], input[type="password"], input[type="email"]{
+.sign-up-form input[type="text"],
+.sign-up-form input[type="password"],
+.sign-up-form input[type="email"] {
   width: 100%;
   padding: 2.5px;
   margin: 15px;
@@ -21,5 +28,5 @@
 }
 
 .sign-up-button {
-  display: flexbox;
+  display: flex;
 }

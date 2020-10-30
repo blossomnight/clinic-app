@@ -1,6 +1,35 @@
-.sign-in-form{
-    display: flex;
-    width: 50%;
-    position: relative;
-    background-color: rgb(141, 10, 10);
+.sign-in-form {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  width: 50%;
+  position: relative;
+  background-color: rgb(141, 10, 10);
+  color: white;
+}
+
+.sign-in-form h3 {
+  transition: width 2s;
+  color: pink;
+}
+
+.sign-in-form div {
+  padding: 0 25% 0 25%;
+  max-width: 280px;
+}
+
+.sign-in-form input[type="text"],
+.sign-in-form input[type="password"],
+.sign-in-form input[type="email"] {
+  width: 100%;
+  padding: 2.5px;
+  margin: 15px;
+  border: none;
+  border-bottom: 2px black solid;
+  background-color: rgb(141, 10, 10);
+  outline: none;
+}
+
+.sign-in-button {
+  display: flex;
 }
