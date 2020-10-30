@@ -7,6 +7,9 @@ class ScreenUserForm extends React.Component {
     let formScreenStyle: CSS.Properties = {
       display: "flex",
       height: "560px",
+      width: "100vw",
+      position: "absolute",
+      marginTop: "15vh",
     };
     return (
       <div className="screen-user-form" style={formScreenStyle}>

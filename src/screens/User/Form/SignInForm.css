@@ -1,9 +1,6 @@
-.sign-in-form {
+.sign-in-form{
     display: flex;
     width: 50%;
     position: relative;
-    background-color: rgb(120, 150, 124);
-
-    margin-top: 10vh;
-    padding: 0 10% 0 10%;
+    background-color: rgb(141, 10, 10);
 }
