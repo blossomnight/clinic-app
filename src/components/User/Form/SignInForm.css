@@ -1,16 +1,10 @@
 .sign-in-form {
+  width: 50%;
   display: flex;
   flex-flow: column;
-  align-items: stretch;
-  width: 50%;
+  align-items: center;
   position: relative;
-  background-color: rgb(141, 10, 10);
-  color: white;
-}
-
-.sign-in-form h3 {
-  transition: width 2s;
-  color: pink;
+  justify-content: center;
 }
 
 .sign-in-form div {
@@ -26,7 +20,6 @@
   margin: 15px;
   border: none;
   border-bottom: 2px black solid;
-  background-color: rgb(141, 10, 10);
   outline: none;
 }
 

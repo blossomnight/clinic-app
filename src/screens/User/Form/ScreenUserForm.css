@@ -1,0 +1,11 @@
+.screen-user-form {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+
+.user-form {
+    position: relative;
+    display: flex;
+    height: calc(100% - 10vh);
+}

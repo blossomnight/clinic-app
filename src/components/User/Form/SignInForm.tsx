@@ -1,6 +1,9 @@
 import React from "react";
-import { addEmitHelpers } from "typescript";
 import "./SignInForm.css";
+import {
+  sendUserData,
+  bodyData,
+} from "../../../screens/User/Form/ScreenUserForm";
 
 type SignInFormState = {
   userEmail: string;
@@ -15,17 +18,13 @@ class SignInForm extends React.Component {
 
   handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    let promise: Promise<Response> = fetch("http://przyba.pl:8080/api/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: this.state.userEmail,
-        password: this.state.userPassword,
-      }),
-    });
+
+    const bodyData: bodyData = {
+      email: this.state.userEmail,
+      password: this.state.userPassword,
+    };
+
+    let promise: Promise<Response> = sendUserData(bodyData, "login", "POST");
 
     promise.then((response: Response) => {
       if (response.ok) {

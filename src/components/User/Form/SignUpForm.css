@@ -1,19 +1,23 @@
 .sign-up-form {
+  width: 50%;
   display: flex;
   flex-flow: column;
-  align-items: stretch;
-  width: 50%;
+  align-items: center;
   position: relative;
+  justify-content: center;
+  min-height: 120px;
 }
 
 .sign-up-form h3 {
   transition: width 2s;
-  color: pink;
+  color: rgb(56, 56, 56);
 }
 
 .sign-up-form div {
   padding: 0 25% 0 25%;
   max-width: 280px;
+  display: inherit;
+  flex-flow: inherit;
 }
 
 .sign-up-form input[type="text"],
@@ -30,3 +34,5 @@
 .sign-up-button {
   display: flex;
 }
+
+

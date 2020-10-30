@@ -1,5 +1,10 @@
 import React from "react";
 import "./SignUpForm.css";
+import CSS from "csstype";
+import {
+  bodyData,
+  sendUserData,
+} from "../../../screens/User/Form/ScreenUserForm";
 
 enum UserType {
   None,
@@ -24,6 +29,7 @@ type SignUpFormState = {
   userSpecialization: string;
 };
 
+type SignUpFormProps = {};
 
 class SignUpForm extends React.Component {
   state: SignUpFormState = {
@@ -31,38 +37,28 @@ class SignUpForm extends React.Component {
     userEmail: "mali@gmail.com",
     userName: "Jan",
     userSurname: "User",
-    userPesel: "12345654321",
+    userPesel: "1209120",
     userPassword: "PASS",
     userRetypePassword: "PASS",
     userSpecialization: "None",
   };
 
   handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    const bodyData: bodyData = {
+      email: this.state.userEmail,
+      name: this.state.userName + " " + this.state.userSurname,
+      password: this.state.userPassword,
+      c_password: this.state.userRetypePassword,
+    };
+
     event.preventDefault();
+    // -------------> Zrobić wyswietlanie tej wiadomości pod drugim polem na hasło
     if (this.state.userPassword !== this.state.userRetypePassword) {
       alert("Hasła nie są identyczne");
       return;
     }
-    let promise: Promise<Response> = fetch(
-      "http://przyba.pl:8080/api/register",
-      {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify({
-          email: this.state.userEmail,
-          name: this.state.userName + " " + this.state.userSurname,
-          password: this.state.userPassword,
-          c_password: this.state.userRetypePassword,
-        }),
-      }
-    );
+
+    let promise: Promise<Response> = sendUserData(bodyData, "register", "POST");
 
     promise.then((response: Response) => {
       alert(
@@ -71,16 +67,14 @@ class SignUpForm extends React.Component {
           : "Błąd przy rejestracji"
       );
     });
-    // promise.then((response: Response) =>
-    //   response.json().then((data) => console.log(data["success"]["token"]))
-    // );
   };
 
   handleInputChange = (event: React.ChangeEvent<HTMLFormElement>): void => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.id]: event.target.value });
   };
 
   handleUserChoice = (event: React.MouseEvent): void => {
+    let headerData: string;
     let value: any = event.currentTarget.getAttribute("value");
     let userType: number = parseInt(value);
     this.setState({
@@ -106,7 +100,6 @@ class SignUpForm extends React.Component {
   };
 
   render() {
-
     return (
       <div className="sign-up-form">
         <h3>{this.getHeader()}</h3>
@@ -140,51 +133,50 @@ class SignUpForm extends React.Component {
               onSubmit={this.handleFormOnSubmit}
               onChange={this.handleInputChange}
             >
-              <span>Email:</span>
+              <label htmlFor="userEmail">Email:</label>
               <input
                 type="email"
                 defaultValue={this.state.userEmail}
-                name="userEmail"
+                id="userEmail"
               />
-              <span>Imię:</span>
+              <label htmlFor="userName">Imię:</label>
               <input
                 type="text"
                 defaultValue={this.state.userName}
-                name="userName"
+                id="userName"
               />
-              <span>Nazwisko:</span>
+              <label htmlFor="userSurname">Nazwisko:</label>
               <input
                 type="text"
                 defaultValue={this.state.userSurname}
-                name="userSurname"
+                id="userSurname"
               />
-              <span>PESEL:</span>
+              <label htmlFor="userPesel">PESEL:</label>
               <input
                 type="text"
                 defaultValue={this.state.userPesel}
-                name="userPesel"
-                minLength={11}
+                id="userPesel"
                 maxLength={11}
               />
-              <span>Hasło:</span>
+              <label htmlFor="userPassword">Hasło:</label>
               <input
                 type="password"
                 defaultValue={this.state.userPassword}
-                name="userPassword"
+                id="userPassword"
               />
-              <span>Powtórz hasło:</span>
+              <label htmlFor="userRetypePassword">Powtórz hasło:</label>
               <input
                 type="password"
                 defaultValue={this.state.userRetypePassword}
-                name="userRetypePassword"
+                id="userRetypePassword"
               />
               {this.state.userType === UserType.Doctor && (
                 <div>
-                  <span>Specjalizacja:</span>
+                  <label htmlFor="userSpecialization">Specjalizacja:</label>
                   <input
                     type="text"
                     defaultValue={this.state.userSpecialization}
-                    name="userSpecialization"
+                    id="userSpecialization"
                   />
                 </div>
               )}
