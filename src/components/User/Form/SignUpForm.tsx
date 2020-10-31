@@ -74,7 +74,6 @@ class SignUpForm extends React.Component {
   };
 
   handleUserChoice = (event: React.MouseEvent): void => {
-    let headerData: string;
     let value: any = event.currentTarget.getAttribute("value");
     let userType: number = parseInt(value);
     this.setState({
@@ -135,6 +134,7 @@ class SignUpForm extends React.Component {
             >
               <label htmlFor="userEmail">Email:</label>
               <input
+                autoFocus
                 type="email"
                 defaultValue={this.state.userEmail}
                 id="userEmail"
