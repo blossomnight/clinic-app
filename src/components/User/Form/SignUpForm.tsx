@@ -19,6 +19,8 @@ enum FormHeaderData {
 }
 
 type SignUpFormState = {
+  passwordsMismatch: boolean;
+  registerSuccessful?: boolean;
   userType: UserType;
   userEmail: string;
   userName: string;
@@ -33,6 +35,8 @@ type SignUpFormProps = {};
 
 class SignUpForm extends React.Component {
   state: SignUpFormState = {
+    passwordsMismatch: false,
+    registerSuccessful: undefined,
     userType: UserType.None,
     userEmail: "mali@gmail.com",
     userName: "Jan",
@@ -52,20 +56,19 @@ class SignUpForm extends React.Component {
     };
 
     event.preventDefault();
-    // -------------> Zrobić wyswietlanie tej wiadomości pod drugim polem na hasło
     if (this.state.userPassword !== this.state.userRetypePassword) {
-      alert("Hasła nie są identyczne");
+      this.setState({ passwordsMismatch: true });
       return;
+    } else {
+      this.setState({ passwordsMismatch: false });
     }
 
     let promise: Promise<Response> = sendUserData(bodyData, "register", "POST");
 
     promise.then((response: Response) => {
-      alert(
-        response.status == 200
-          ? "Poprawna rejestracja"
-          : "Błąd przy rejestracji"
-      );
+      this.setState({
+        registerSuccessful: response.status == 200,
+      });
     });
   };
 
@@ -84,6 +87,8 @@ class SignUpForm extends React.Component {
   handleGoBack = (): void => {
     this.setState({
       userType: UserType.None,
+      passwordsMismatch: false,
+      registerSuccessful: undefined,
     });
   };
 
@@ -132,6 +137,17 @@ class SignUpForm extends React.Component {
               onSubmit={this.handleFormOnSubmit}
               onChange={this.handleInputChange}
             >
+              {this.state.registerSuccessful === true && (
+                <div className="user-data-alert correct">
+                  Udało się zarejestrować konto, można się zalogować
+                </div>
+              )}
+              {this.state.registerSuccessful === false && (
+                <div className="user-data-alert wrong">
+                  Nie udało się zarejestrować konta: prawdopodobnie konto o
+                  takim emailu jest już zarejestrowane
+                </div>
+              )}
               <label htmlFor="userEmail">Email:</label>
               <input
                 autoFocus
@@ -170,6 +186,11 @@ class SignUpForm extends React.Component {
                 defaultValue={this.state.userRetypePassword}
                 id="userRetypePassword"
               />
+              {this.state.passwordsMismatch && (
+                <div className="user-data-alert wrong">
+                  Hasła nie są identyczne
+                </div>
+              )}
               {this.state.userType === UserType.Doctor && (
                 <div>
                   <label htmlFor="userSpecialization">Specjalizacja:</label>

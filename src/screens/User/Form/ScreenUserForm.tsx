@@ -28,13 +28,22 @@ export let sendUserData = (
   });
 };
 
-export class ScreenUserForm extends React.Component {
+type ScreenUserFormProps = {
+  onUserAuthenticated: () => void;
+};
+
+export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
+  constructor(props: ScreenUserFormProps) {
+    super(props);
+  }
+
   render() {
+    let onUserAuthenticated = this.props;
     return (
       <div className="screen-user-form">
         <TopMenu />
         <div className="user-form">
-          <SignInForm />
+          <SignInForm onUserAuthenticated={this.props.onUserAuthenticated} />
           <SignUpForm />
         </div>
       </div>

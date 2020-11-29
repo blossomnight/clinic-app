@@ -20,7 +20,7 @@
 }
 
 .sign-up-form div {
-  padding: 0 25% 0 25%;
+  /* padding: 0 25% 0 25%; */
   max-width: 280px;
   display: inherit;
   flex-flow: inherit;
@@ -42,3 +42,16 @@
 }
 
 
+.user-data-alert {
+  font-size: 12px;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  margin: 5px 0px 5px 0px;
+}
+.wrong {
+  background-color: red;
+}
+.correct {
+  background-color: green;
+}

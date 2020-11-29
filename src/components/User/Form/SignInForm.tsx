@@ -1,5 +1,6 @@
 import React from "react";
 import "./SignInForm.css";
+import "./SignUpForm.css";
 import {
   sendUserData,
   bodyData,
@@ -8,13 +9,23 @@ import {
 type SignInFormState = {
   userEmail: string;
   userPassword: string;
+  loginFailed: boolean;
 };
 
-class SignInForm extends React.Component {
+type SignInFormProps = {
+  onUserAuthenticated: () => void;
+};
+
+class SignInForm extends React.Component<SignInFormProps> {
   state: SignInFormState = {
     userEmail: "",
     userPassword: "",
+    loginFailed: false,
   };
+
+  constructor(props: SignInFormProps) {
+    super(props);
+  }
 
   handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -28,14 +39,19 @@ class SignInForm extends React.Component {
 
     promise.then((response: Response) => {
       if (response.ok) {
-        alert("Poprawne logowanie");
+        this.setState({
+          loginFailed: false,
+        });
         promise.then((response: Response) =>
           response.json().then((data) => {
             localStorage.setItem("token", data["success"]["token"]);
           })
         );
+        this.props.onUserAuthenticated();
       } else {
-        alert("Błąd przy logowaniu");
+        this.setState({
+          loginFailed: true,
+        });
       }
     });
   };
@@ -54,6 +70,11 @@ class SignInForm extends React.Component {
             onSubmit={this.handleFormOnSubmit}
             onChange={this.handleInputChange}
           >
+            {this.state.loginFailed && (
+              <div className="user-data-alert wrong">
+                Niepoprawne dane logowania
+              </div>
+            )}
             <span>Email:</span>
             <input
               type="email"
