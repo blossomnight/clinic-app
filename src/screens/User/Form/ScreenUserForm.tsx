@@ -37,8 +37,15 @@ export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
     super(props);
   }
 
+  componentDidMount() {
+    //localStorage.setItem("token", data["success"]["token"]);
+    if (localStorage.getItem("token") !== null)
+    {
+      this.props.onUserAuthenticated();
+    }
+  }
+
   render() {
-    let onUserAuthenticated = this.props;
     return (
       <div className="screen-user-form">
         <TopMenu />
