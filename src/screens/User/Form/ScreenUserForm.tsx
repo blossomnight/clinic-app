@@ -11,7 +11,7 @@ export type bodyData = {
   c_password?: string;
 };
 
-const API_URL = "http://przyba.pl:8080/api/";
+const API_URL = process.env.REACT_APP_API_URL
 
 export let sendUserData = (
   bodyData: bodyData,
