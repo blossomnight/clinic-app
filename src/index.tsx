@@ -4,6 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ScreensRoot from './screens/ScreensRoot';
 
+// Configure dotenv support
+require('dotenv').config()
+
 ReactDOM.render(
   <React.StrictMode>
     <ScreensRoot />
