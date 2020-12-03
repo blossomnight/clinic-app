@@ -6,7 +6,8 @@ import {
   sendUserData,
 } from "../../../screens/User/Form/ScreenUserForm";
 
-enum UserType {
+
+export enum UserType {
   None,
   Patient,
   Doctor,
@@ -33,7 +34,7 @@ type SignUpFormState = {
 
 type SignUpFormProps = {};
 
-class SignUpForm extends React.Component {
+export class SignUpForm extends React.Component {
   state: SignUpFormState = {
     passwordsMismatch: false,
     registerSuccessful: undefined,
@@ -53,6 +54,9 @@ class SignUpForm extends React.Component {
       name: this.state.userName + " " + this.state.userSurname,
       password: this.state.userPassword,
       c_password: this.state.userRetypePassword,
+      pesel: this.state.userPesel,
+      specialization: this.state.userSpecialization,
+
     };
 
     event.preventDefault();
@@ -62,8 +66,8 @@ class SignUpForm extends React.Component {
     } else {
       this.setState({ passwordsMismatch: false });
     }
-
-    let promise: Promise<Response> = sendUserData(bodyData, "register", "POST");
+    // 
+    let promise: Promise<Response> = sendUserData(bodyData, "register", "POST", this.state.userType);
 
     promise.then((response: Response) => {
       this.setState({
@@ -210,4 +214,3 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default SignUpForm;
