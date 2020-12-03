@@ -1,14 +1,17 @@
 import React from "react";
 import SignInForm from "../../../components/User/Form/SignInForm";
-import SignUpForm from "../../../components/User/Form/SignUpForm";
+import { SignUpForm, UserType } from "../../../components/User/Form/SignUpForm";
 import TopMenu from "../../../components/TopMenu/TopMenu";
 import "./ScreenUserForm.css";
+import { isDefaultClause } from "typescript";
 
 export type bodyData = {
   email: string;
   name?: string;
   password: string;
   c_password?: string;
+  pesel?: string;
+  specialization?: string;
 };
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -16,9 +19,23 @@ const API_URL = process.env.REACT_APP_API_URL
 export let sendUserData = (
   bodyData: bodyData,
   action: string,
-  method: string
+  method: string,
+  userType?: UserType,
 ): Promise<Response> => {
-  return fetch(API_URL + action, {
+  let url = "";
+  if(action == "register"){
+    if(userType == UserType.Doctor){
+      url = API_URL + action + "_doctor";
+    }
+    else{
+      url = API_URL + action;
+    }
+  }
+  else{
+    url = API_URL + action;
+  }
+  
+  return fetch(url, {
     method: method,
     mode: "cors",
     headers: {
