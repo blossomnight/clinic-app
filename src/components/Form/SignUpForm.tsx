@@ -1,17 +1,8 @@
 import React from "react";
 import "./SignUpForm.css";
-import CSS from "csstype";
-import {
-  bodyData,
-  sendUserData,
-} from "../../../screens/User/Form/ScreenUserForm";
-
-
-export enum UserType {
-  None,
-  Patient,
-  Doctor,
-}
+import { bodyData, sendUserData } from "../../screens/Form/ScreenUserForm";
+import UserDataMock from "../../mocks/UserSignUpData.json";
+import { UserType } from "../../utils/shared-types";
 
 enum FormHeaderData {
   Doctor = "Jestem lekarzem",
@@ -39,13 +30,13 @@ export class SignUpForm extends React.Component {
     passwordsMismatch: false,
     registerSuccessful: undefined,
     userType: UserType.None,
-    userEmail: "mali@gmail.com",
-    userName: "Jan",
-    userSurname: "User",
-    userPesel: "1209120",
-    userPassword: "PASS",
-    userRetypePassword: "PASS",
-    userSpecialization: "None",
+    userEmail: UserDataMock["User1"]["userEmail"],
+    userName: UserDataMock["User1"]["userName"],
+    userSurname: UserDataMock["User1"]["userSurname"],
+    userPesel: UserDataMock["User1"]["userPesel"],
+    userPassword: UserDataMock["User1"]["userPassword"],
+    userRetypePassword: UserDataMock["User1"]["userRetypePassword"],
+    userSpecialization: UserDataMock["User1"]["userSpecialization"],
   };
 
   handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -56,7 +47,6 @@ export class SignUpForm extends React.Component {
       c_password: this.state.userRetypePassword,
       pesel: this.state.userPesel,
       specialization: this.state.userSpecialization,
-
     };
 
     event.preventDefault();
@@ -66,8 +56,13 @@ export class SignUpForm extends React.Component {
     } else {
       this.setState({ passwordsMismatch: false });
     }
-    // 
-    let promise: Promise<Response> = sendUserData(bodyData, "register", "POST", this.state.userType);
+
+    let promise: Promise<Response> = sendUserData(
+      bodyData,
+      "register",
+      "POST",
+      this.state.userType
+    );
 
     promise.then((response: Response) => {
       this.setState({
@@ -213,4 +208,3 @@ export class SignUpForm extends React.Component {
     );
   }
 }
-

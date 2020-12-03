@@ -1,0 +1,19 @@
+.scree{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+
+.screen .user-home {
+
+}
+
+.screen-choice-grid {
+    position: absolute;
+    box-sizing: border-box;
+    height: 80vh;
+}
+
+.screen-choice-button {
+
+}

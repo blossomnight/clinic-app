@@ -1,10 +1,7 @@
 import React from "react";
 import "./SignInForm.css";
 import "./SignUpForm.css";
-import {
-  sendUserData,
-  bodyData,
-} from "../../../screens/User/Form/ScreenUserForm";
+import { sendUserData, bodyData } from "../../screens/Form/ScreenUserForm";
 
 type SignInFormState = {
   userEmail: string;

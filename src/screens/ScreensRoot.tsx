@@ -1,6 +1,6 @@
 import React from "react";
-import { ScreenUserForm } from "./User/Form/ScreenUserForm";
-import { ScreenUserHome } from "./User/Home/ScreenUserHome";
+import { ScreenUserForm } from "./Form/ScreenUserForm";
+import { ScreenUserHome } from "./Home/ScreenUserHome";
 
 type ScreensRootState = {
   isLoggedIn: boolean;

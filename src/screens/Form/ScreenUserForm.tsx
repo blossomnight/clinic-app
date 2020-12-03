@@ -1,9 +1,9 @@
 import React from "react";
-import SignInForm from "../../../components/User/Form/SignInForm";
-import { SignUpForm, UserType } from "../../../components/User/Form/SignUpForm";
-import TopMenu from "../../../components/TopMenu/TopMenu";
+import SignInForm from "../../components/Form/SignInForm";
+import { SignUpForm } from "../../components/Form/SignUpForm";
+import TopMenu from "../../components/TopMenu/TopMenu";
+import { UserType } from "../../utils/shared-types";
 import "./ScreenUserForm.css";
-import { isDefaultClause } from "typescript";
 
 export type bodyData = {
   email: string;
@@ -14,27 +14,25 @@ export type bodyData = {
   specialization?: string;
 };
 
-const API_URL = process.env.REACT_APP_API_URL
+const API_URL = process.env.REACT_APP_API_URL;
 
 export let sendUserData = (
   bodyData: bodyData,
   action: string,
   method: string,
-  userType?: UserType,
+  userType?: UserType
 ): Promise<Response> => {
   let url = "";
-  if(action == "register"){
-    if(userType == UserType.Doctor){
+  if (action == "register") {
+    if (userType == UserType.Doctor) {
       url = API_URL + action + "_doctor";
-    }
-    else{
+    } else {
       url = API_URL + action;
     }
-  }
-  else{
+  } else {
     url = API_URL + action;
   }
-  
+
   return fetch(url, {
     method: method,
     mode: "cors",
@@ -56,8 +54,7 @@ export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
 
   componentDidMount() {
     //localStorage.setItem("token", data["success"]["token"]);
-    if (localStorage.getItem("token") !== null)
-    {
+    if (localStorage.getItem("token") !== null) {
       this.props.onUserAuthenticated();
     }
   }
