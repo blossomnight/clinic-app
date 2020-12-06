@@ -1,4 +1,4 @@
-.scree{
+.screen{
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -15,5 +15,6 @@
 }
 
 .screen-choice-button {
-
+    width: 400px;
+    height: 300px;
 }

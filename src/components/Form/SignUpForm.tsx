@@ -66,7 +66,7 @@ export class SignUpForm extends React.Component {
 
     promise.then((response: Response) => {
       this.setState({
-        registerSuccessful: response.status == 200,
+        registerSuccessful: response.status === 200,
       });
     });
   };

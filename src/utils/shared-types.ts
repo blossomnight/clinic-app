@@ -3,3 +3,11 @@ export enum UserType {
     Patient,
     Doctor,
 }
+
+export enum ScreenType {
+    None,
+    TypeTestResults,
+    TypePerscriptions,
+    TypeCreateConsultation,
+    TypeConsultations
+}

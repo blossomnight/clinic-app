@@ -5,6 +5,8 @@ import TopMenu from "../../components/TopMenu/TopMenu";
 import { UserType } from "../../utils/shared-types";
 import "./ScreenUserForm.css";
 
+const API_URL = process.env.REACT_APP_API_URL_PROD;
+
 export type bodyData = {
   email: string;
   name?: string;
@@ -14,8 +16,6 @@ export type bodyData = {
   specialization?: string;
 };
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 export let sendUserData = (
   bodyData: bodyData,
   action: string,
@@ -23,8 +23,8 @@ export let sendUserData = (
   userType?: UserType
 ): Promise<Response> => {
   let url = "";
-  if (action == "register") {
-    if (userType == UserType.Doctor) {
+  if (action === "register") {
+    if (userType === UserType.Doctor) {
       url = API_URL + action + "_doctor";
     } else {
       url = API_URL + action;
@@ -47,14 +47,28 @@ type ScreenUserFormProps = {
   onUserAuthenticated: () => void;
 };
 
+let validateUserToken = (): Promise<Response> => {
+  let bodyData = localStorage.getItem("token");
+  return fetch(API_URL + "details", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+};
+
 export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
   constructor(props: ScreenUserFormProps) {
     super(props);
   }
 
   componentDidMount() {
-    //localStorage.setItem("token", data["success"]["token"]);
     if (localStorage.getItem("token") !== null) {
+      validateUserToken()
+        .then((response) => console.log())
+        .catch((error) => console.log(error));
       this.props.onUserAuthenticated();
     }
   }

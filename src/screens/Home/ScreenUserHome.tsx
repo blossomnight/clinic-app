@@ -1,31 +1,44 @@
 import React from "react";
 import TopMenu from "../../components/TopMenu/TopMenu";
+import { ScreenUserForm } from "../Form/ScreenUserForm";
 import "./ScreenUserHome.css";
+import { ScreenType } from "../../utils/shared-types";
 
-export class ScreenUserHome extends React.Component {
+type ScreenUserHomeProps = {
+  onScreenChoice: (e: React.MouseEvent<HTMLDivElement>) => void;
+};
+export class ScreenUserHome extends React.Component<ScreenUserHomeProps> {
   render() {
     return (
       <div className="screen user-home">
         <TopMenu />
-        <div className="screen-choice-grid">
+        <div className="screen-choice-grid" onClick={this.props.onScreenChoice}>
           <div>
-            <button className="screen-choice-button">
+            <button
+              name={ScreenType[ScreenType.TypeTestResults]}
+              className="screen-choice-button"
+            >
               {"Wyniki Badań"}
-              {/* test-resu */}
             </button>
-            <button className="screen-choice-button">
+            <button
+              name={ScreenType[ScreenType.TypePerscriptions]}
+              className="screen-choice-button"
+            >
               {"Odbierze E-receptę"}
-              {/* prescription  */}
             </button>
           </div>
           <div>
-            <button className="screen-choice-button">
+            <button
+              name={ScreenType[ScreenType.TypeCreateConsultation]}
+              className="screen-choice-button"
+            >
               {"Umów wizytę"}
-              {/* consultations */}
             </button>
-            <button className="screen-choice-button">
+            <button
+              name={ScreenType[ScreenType.TypeConsultations]}
+              className="screen-choice-button"
+            >
               {"Umów Konsultację"}
-              {/* test-results */}
             </button>
           </div>
         </div>
