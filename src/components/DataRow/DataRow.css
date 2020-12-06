@@ -1,0 +1,27 @@
+.table-cell {
+    font-family: "Roboto",sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.table-divider {
+    align-items: center;
+    justify-content: center;
+}
+
+.table-divider::before {
+    content: "";
+    display: flex;
+    width: 1px;
+    height: 38px;
+    background-image: linear-gradient(#ccc 35%, rgba(255,255,255,0) 0%);
+    background-position: left center;
+    background-size: 1px 6px;
+    background-repeat: repeat-y;
+}

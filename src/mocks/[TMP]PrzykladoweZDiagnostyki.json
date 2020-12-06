@@ -1,0 +1,64 @@
+{
+  "orders": [
+    {
+      "id": "khwWbCnbKjSiSWgvrFKL2i6Nvk2pev5ieOtRcjam9ig",
+      "barcode": "7173402321",
+      "patient": "SWIDNIK130615974",
+      "created": "2020-09-14T10:37:36",
+      "base": "SWIDNIK",
+      "serverName": "SWIDNIK",
+      "tests": "Us\u0142uga - pobranie materia\u0142u,Witamina B12,\u017Belazo",
+      "registerPlace": "21-040 \u015Awidnik, Al. Lotnik\u00F3w Polskich 18",
+      "city": "21-040 \u015Awidnik",
+      "street": "Al. Lotnik\u00F3w Polskich 18"
+    },
+    {
+      "id": "0DtUDTePzbyb13uaTig5Stphq1LfWvlfFU7KYFfjfTg",
+      "barcode": "3080402421",
+      "patient": "SWIDNIK130615974",
+      "created": "2020-07-22T10:02:09",
+      "base": "SWIDNIK",
+      "serverName": "SWIDNIK",
+      "tests": "ALT,AST,Badanie og\u00F3lne moczu,Bia\u0142ko ca\u0142kowite,Bilirubina ca\u0142kowita,Elektrolity (Na, K),FT4,Glukoza,Kreatynina,Kwas moczowy,Lipidogram (CHOL, HDL, nie-HDL, LDL, TG),Morfologia krwi,OB,Osad moczu,TSH",
+      "registerPlace": "21-040 \u015Awidnik, Al. Lotnik\u00F3w Polskich 18",
+      "city": "21-040 \u015Awidnik",
+      "street": "Al. Lotnik\u00F3w Polskich 18"
+    },
+    {
+      "id": "L8BuZPx6N-cyJAB7O8Dd-GJ14332NxFVf8biBf1O_IA",
+      "barcode": "4314249021",
+      "patient": "SWIDNIK130615974",
+      "created": "2019-09-11T08:46:50",
+      "base": "SWIDNIK",
+      "serverName": "SWIDNIK",
+      "tests": "ALT,AST,Badanie og\u00F3lne moczu,CRP, ilo\u015Bciowo,Morfologia krwi,OB,Osad moczu,\u017Belazo",
+      "registerPlace": "21-040 \u015Awidnik, Al. Lotnik\u00F3w Polskich 18",
+      "city": "21-040 \u015Awidnik",
+      "street": "Al. Lotnik\u00F3w Polskich 18"
+    },
+    {
+      "id": "p4SJ8pLod0vkYu-2VtksrGxicG7MKH-LIlLQd7yjK2M",
+      "barcode": "5925026021",
+      "patient": "SWIDNIK130615974",
+      "created": "2019-03-11T09:36:53",
+      "base": "SWIDNIK",
+      "serverName": "SWIDNIK",
+      "tests": "HCV przeciwcia\u0142a,Mycobacterium tuberculosis test jako\u015Bciowy,Wirus HIV,Wirus zapalenia w\u0105troby typ B",
+      "registerPlace": "21-040 \u015Awidnik, ul. Kruczkowskiego 6A",
+      "city": "21-040 \u015Awidnik",
+      "street": "ul. Kruczkowskiego 6A"
+    },
+    {
+      "id": "h2O806Hz5Ezh8GocEd_YTgTxsglQka-uXOtnvy0FLXs",
+      "barcode": "3047743211",
+      "patient": "SWIDNIK130615974",
+      "created": "2018-02-19T08:39:05",
+      "base": "SWIDNIK",
+      "serverName": "SWIDNIK",
+      "tests": "HCV przeciwcia\u0142a,Mycobacterium tuberculosis test jako\u015Bciowy,Wirus zapalenia w\u0105troby typ B",
+      "registerPlace": "21-040 \u015Awidnik, ul. Kruczkowskiego 6A",
+      "city": "21-040 \u015Awidnik",
+      "street": "ul. Kruczkowskiego 6A"
+    }
+  ]
+}

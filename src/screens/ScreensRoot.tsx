@@ -86,7 +86,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
     //let match = useRouteMatch();
     const { isLoggedIn, currentScreen } = this.state;
     return (
-      <div className="App">
+      <div>
         {!isLoggedIn && (
           <ScreenUserForm onUserAuthenticated={this.handleUserAuthenticated} />
         )}

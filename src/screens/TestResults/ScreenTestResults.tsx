@@ -1,4 +1,6 @@
 import React from "react";
+import { ListingContainer } from "../../components/ListingContainer/ListingContainer";
+import TopMenu from "../../components/TopMenu/TopMenu";
 
 type TestResultsState = {
   isDetailsContainerVisible: boolean;
@@ -9,6 +11,12 @@ type TestResultsState = {
 
 export class ScreenTestResults extends React.Component {
   render() {
-    return <div>"WYNIKI BADAŃ"</div>;
+    return (
+      <div className="screen tests-result">
+        <TopMenu />
+        "WYNIKI BADAŃ"
+        <ListingContainer />
+      </div>
+    );
   }
 }

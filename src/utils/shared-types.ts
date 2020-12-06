@@ -11,3 +11,10 @@ export enum ScreenType {
     TypeCreateConsultation,
     TypeConsultations
 }
+
+export type RowPlaceholders = {
+    placeholder1: string,
+    placeholder2: string,
+    placeholder3: string,
+    placeholder4: string,
+}
