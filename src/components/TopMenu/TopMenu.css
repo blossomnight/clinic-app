@@ -3,4 +3,12 @@
     height: 10vh;
     background-color: #8d9685;
     position: relative;
+    display: flex;
+}
+
+.user-menu {
+    width: 5%;
+    background: #FF5C00;
+    right: 0;
+    min-width: 150px;
 }

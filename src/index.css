@@ -33,3 +33,18 @@ body h3 {
   transition: width 2s;
   color: rgb(56, 56, 56);
 }
+
+::-webkit-scrollbar {
+  /* width: 15px;
+  background:lightgray; */
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background:gray;
+} 

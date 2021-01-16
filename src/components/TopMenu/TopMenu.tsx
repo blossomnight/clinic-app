@@ -11,7 +11,11 @@ class TopMenu extends React.Component {
   }
 
   render() {
-    return <div className="top-menu"></div>;
+    return (
+      <div className="top-menu">
+        <div className="user-menu"></div>
+      </div>
+    );
   }
 }
 

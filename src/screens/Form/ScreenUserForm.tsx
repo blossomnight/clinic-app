@@ -5,7 +5,7 @@ import TopMenu from "../../components/TopMenu/TopMenu";
 import { UserType } from "../../utils/shared-types";
 import "./ScreenUserForm.css";
 
-const API_URL = process.env.REACT_APP_API_URL_PROD;
+const API_URL = process.env.REACT_APP_API_URL;
 
 export type bodyData = {
   email: string;
@@ -32,7 +32,7 @@ export let sendUserData = (
   } else {
     url = API_URL + action;
   }
-
+  console.log(bodyData);
   return fetch(url, {
     method: method,
     mode: "cors",
