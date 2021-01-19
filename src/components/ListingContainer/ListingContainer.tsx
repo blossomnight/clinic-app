@@ -43,6 +43,8 @@ export class ListingContainer extends React.Component<
           head4={"Punkt Pobrań"}
         />
         <div className="table-content">{this.createDataRows()}</div>
+
+        <span className="dot"></span>
       </div>
     );
   }
@@ -62,19 +64,24 @@ export const RowsInfo = (props: RowsInfoProps) => {
       <div className="table-headline">
         <span>{head1}</span>
       </div>
-      <div className="table-headline"></div>
+      <div className="table-headline">
+        <span>{head1}</span>
+      </div>
       <div className="table-headline">
         <span>{head2}</span>
       </div>
-      <div className="table-headline"></div>
+      <div className="table-headline">
+        <span>{head1}</span>
+      </div>
       <div className="table-headline">
         <span>{head3}</span>
       </div>
-      <div className="table-headline"></div>
+      <div className="table-headline">
+        <span>{head3}</span>
+      </div>
       <div className="table-headline">
         <span>{head4}</span>
       </div>
-      <div className="headers-divider"></div>
     </div>
   );
 };

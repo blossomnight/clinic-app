@@ -5,6 +5,7 @@ import "./ScreenCreateConsultation.css";
 import Specializations from "../../utils/@Specialization-List.json";
 import { DentistsAvailability } from "../../mocks/DentistsAvailability";
 import { Spinner } from "../../utils/Spinner/Spinner";
+import { Header3 } from "../../utils/h3/Header3";
 import { DoctorDetails } from "../../utils/shared-types";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -86,7 +87,10 @@ export class ScreenCreateConsultation extends React.Component {
         <TopMenu />
         <div className="consultations-box">
           <div className="left-search-box">
-            <h2>Rejestracja</h2>
+            <Header3
+              iconName={"fi-rr-stethoscope"}
+              contentText={"Rejestracja wizyt"}
+            />
             <div className="dropdown">
               <button className="dropbutton">Wybierz specjalizację</button>
               <div className="dropdown-content">

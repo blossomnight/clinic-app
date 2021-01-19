@@ -19,7 +19,14 @@ button:focus {
   outline: none;
 }
 
-body button[type="button"] {
+.component-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+button[type="button"] {
   font-family: "Work Sans";
   background-color: #8d9685;
   border: none;
@@ -32,7 +39,7 @@ body button[type="button"] {
   letter-spacing: 0.4px;
 }
 
-body button[type="button"]:hover {
+button[type="button"]:hover {
   background-color: #778070;
   cursor: pointer;
 }
@@ -56,3 +63,4 @@ body h3 {
   border-radius: 15px;
   background:gray;
 } 
+
