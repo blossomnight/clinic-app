@@ -3,6 +3,8 @@ import "./SignUpForm.css";
 import { bodyData, sendUserData } from "../../screens/Form/ScreenUserForm";
 import UserDataMock from "../../mocks/UserSignUpData.json";
 import { UserType } from "../../utils/shared-types";
+import Specializations from "../../utils/@Specialization-List.json";
+import CSS from "csstype";
 
 enum FormHeaderData {
   Doctor = "Jestem lekarzem",
@@ -21,6 +23,7 @@ type SignUpFormState = {
   userPassword: string;
   userRetypePassword: string;
   userSpecialization: string;
+  dropDownVisible: boolean;
 };
 
 type SignUpFormProps = {};
@@ -36,10 +39,11 @@ export class SignUpForm extends React.Component {
     userPesel: UserDataMock["User1"]["userPesel"],
     userPassword: UserDataMock["User1"]["userPassword"],
     userRetypePassword: UserDataMock["User1"]["userRetypePassword"],
-    userSpecialization: UserDataMock["User1"]["userSpecialization"],
+    userSpecialization: "",
+    dropDownVisible: false,
   };
 
-  handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  handleFormOnSubmit = (event: React.MouseEvent<HTMLInputElement>): void => {
     const bodyData: bodyData = {
       email: this.state.userEmail,
       name: this.state.userName + " " + this.state.userSurname,
@@ -91,6 +95,20 @@ export class SignUpForm extends React.Component {
     });
   };
 
+  handleSpecializationChoice = (event: React.MouseEvent) => {
+    const data = event.target as HTMLDivElement;
+    this.setState({
+      dropDownVisible: false,
+      userSpecialization: data.innerHTML,
+    });
+  };
+
+  handleDropDownOnClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (this.state.dropDownVisible) this.setState({ dropDownVisible: false });
+    else this.setState({ dropDownVisible: true });
+  };
+
   getHeader = (): string => {
     switch (this.state.userType) {
       case UserType.Doctor:
@@ -133,7 +151,6 @@ export class SignUpForm extends React.Component {
 
             <form
               className="sign-up-form-container"
-              onSubmit={this.handleFormOnSubmit}
               onChange={this.handleInputChange}
             >
               {this.state.registerSuccessful === true && (
@@ -191,16 +208,33 @@ export class SignUpForm extends React.Component {
                 </div>
               )}
               {this.state.userType === UserType.Doctor && (
-                <div>
-                  <label htmlFor="userSpecialization">Specjalizacja:</label>
-                  <input
-                    type="text"
-                    defaultValue={this.state.userSpecialization}
-                    id="userSpecialization"
-                  />
+                <div className="dropdown" onClick={this.handleDropDownOnClick}>
+                  <button className="dropbutton">
+                    {this.state.userSpecialization == ""
+                      ? "Wybierz specjalizację"
+                      : `${this.state.userSpecialization}`}
+                  </button>
+                  <div
+                    className="dropdown-content"
+                    style={
+                      this.state.dropDownVisible
+                        ? { display: "block" }
+                        : { display: "none" }
+                    }
+                  >
+                    {Specializations["Specialization"].map((data) => {
+                      return (
+                        <a onClick={this.handleSpecializationChoice}>{data}</a>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
-              <input type="submit" value="Zarejestruj" />
+              <input
+                type="button"
+                value="Zarejestruj"
+                onClick={this.handleFormOnSubmit}
+              />
             </form>
           </div>
         )}

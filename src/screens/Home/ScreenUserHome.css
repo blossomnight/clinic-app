@@ -1,20 +1,55 @@
 .screen{
-    height: 100vh;
-    width: 100vw;
+    height: 90vh;
+    width: 100%;
     position: absolute;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.screen .user-home {
-
+.buttons-wrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+   
 }
 
 .screen-choice-grid {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    width: 100vw;
     box-sizing: border-box;
-    height: 80vh;
 }
 
-.screen-choice-button {
-    width: 400px;
-    height: 300px;
+.buttons-box > div {
+    justify-content: center;
+    display: flex;
+    width: 100%;
 }
+.screen-choice-button {
+    height: 20vw;
+    width: 20vw;
+    max-height: 250px;
+    max-width: 250px;
+    margin: 12px;
+    border: none;
+    background-color: white;
+    box-shadow: -5px 5px 12px rgba(0, 0, 0, 0.09);
+    border-radius: 7px;
+    color: #6f6f6f;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+
+.screen-choice-button:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transform: translateY(-16px);
+    transition: 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+}
+
+
+

@@ -1,0 +1,37 @@
+.header3-wrapper {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    /* margin-left: 6rem; */
+    margin-top: 3rem;
+    padding: 1rem;
+
+}
+
+.h3-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    background-color: #eaeaea;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.h3-icon-wrapper > i {
+    font-size: 1.5em;
+}
+
+.h3-header-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 20px;
+}
+
+.h3-header-wrapper > p {
+    font-size: 1.4rem;
+    font-weight: 600;
+}

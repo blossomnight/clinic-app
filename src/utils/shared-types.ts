@@ -11,3 +11,38 @@ export enum ScreenType {
     TypeCreateConsultation,
     TypeConsultations
 }
+
+export type RowPlaceholders = {
+    placeholder1: string,
+    placeholder2: string,
+    placeholder3: string,
+    placeholder4: string,
+}
+
+export type DoctorDetails = {
+    user_id?: string;
+    name: string;
+    specialization: string;
+    visits: {date: string}[];
+}
+
+
+export type ReservedConsultation = {
+    id?: number,
+    date: string,
+    doctor_id: string,
+    user_id: string,
+}
+
+export type Medication = {
+    name: string,
+    price: number,
+
+}
+export type PrescriptionData = {
+    serial_number: number,
+    date: string,
+    medications?: Array<{medication: Medication}>
+}
+
+

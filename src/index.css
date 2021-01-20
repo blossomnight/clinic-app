@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2d2d2d;
@@ -11,8 +11,23 @@ code {
     monospace;
 }
 
-body button[type="button"] {
-  font-family: 'Montserrat', sans-serif;
+button {
+  font-family: "Work Sans", sans-serif;
+}
+
+button:focus {
+  outline: none;
+}
+
+.component-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+button[type="button"] {
+  font-family: "Work Sans";
   background-color: #8d9685;
   border: none;
   outline: none;
@@ -24,7 +39,7 @@ body button[type="button"] {
   letter-spacing: 0.4px;
 }
 
-body button[type="button"]:hover {
+button[type="button"]:hover {
   background-color: #778070;
   cursor: pointer;
 }
@@ -33,3 +48,19 @@ body h3 {
   transition: width 2s;
   color: rgb(56, 56, 56);
 }
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+ }
+ ::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+  border-radius: 15px;
+ }
+ ::-webkit-scrollbar-thumb:hover{
+  background: #7d7d7d;
+ }
+ ::-webkit-scrollbar-track{
+  background: #ffffff;
+  border-radius: 15px;
+ }
