@@ -10,9 +10,12 @@ type SearchConsultationResultsProps = {
 };
 
 type SearchConsultationResultsState = {
-  chosenDoctorId: number;
-  chosenDate: string;
-  chosenTime: string;
+  selectedDoctorId: number;
+  selectedDate: string;
+  selectedHour: string;
+  shouldLoadHours: boolean;
+  shouldLoadDates: boolean;
+  activeDayHours: Array<{ hour: string; available: boolean }>;
 };
 
 const AvailableDates: Array<{ date: string; display: string }> = [
@@ -38,25 +41,17 @@ const AvailableDates: Array<{ date: string; display: string }> = [
   },
 ];
 
-const ActiveDayHours: Array<string> = [
-  "8:00",
-  "8:30",
-  "9:00",
-  "9:30",
-  "10:00",
-  "10:30",
-  "11:00",
-  "14:30",
-];
-
 export class SearchConsultationResults extends React.Component<
   SearchConsultationResultsProps,
   SearchConsultationResultsState
 > {
   state = {
-    chosenDoctorId: NaN,
-    chosenDate: "",
-    chosenTime: "",
+    selectedDoctorId: NaN,
+    selectedDate: "",
+    selectedHour: "",
+    shouldLoadHours: false,
+    shouldLoadDates: false,
+    activeDayHours: [{ hour: "", available: true }],
   };
 
   sendConsultationRegisterData = (): void => {
@@ -71,7 +66,7 @@ export class SearchConsultationResults extends React.Component<
   };
 
   handleConsultationRegister = (event: React.MouseEvent): void => {
-    console.log("Wizyta zarejestrowana");
+    alert("Wizyta zarejestrowana");
     //Info, ze udalo się zarejestrować wizytę
     //POST na API z wybranymi danymi
 
@@ -83,37 +78,65 @@ export class SearchConsultationResults extends React.Component<
       event.currentTarget.getAttribute("id")?.toString() as string
     );
     this.setState({
-      chosenDoctorId: doctorId,
+      selectedDoctorId: doctorId,
+      shouldLoadDates: true,
     });
   };
 
   handleDateClick = (event: React.MouseEvent<HTMLDivElement>): void => {
-    let chosenDate: string = event.currentTarget
-      .getAttribute("id")
-      ?.toString() as string;
+    let selectedDate: string = event.currentTarget.getAttribute("id") as string;
+    const activeDayHours: Array<{
+      hour: string;
+      available: boolean;
+    }> = getAvailableHours(
+      this.state.selectedDoctorId,
+      this.state.selectedDate,
+      this.props.availableDoctors
+    );
+
+    //wywala tu apke
     this.setState({
-      chosenDate: chosenDate,
+      selectedDate: selectedDate,
+      shouldLoadHours: true,
+      activeDayHours: activeDayHours,
     });
 
+    // potem wyswietlac jeszcze te niedostepne jako wyszarzone
+
     // generateAvailableHours -> Array<{hour: string, available: boolean}>
+  };
+
+  handleHourClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+    let selectedHour: string = event.currentTarget.getAttribute("id") as string;
+    this.setState({
+      selectedHour: selectedHour,
+    });
+    console.log();
   };
 
   render() {
     const activeAvailableButtonClass = "available-button-box chosen";
     const { availableDoctors } = this.props;
-    const { chosenDoctorId, chosenDate } = this.state;
+    const {
+      selectedDoctorId,
+      selectedDate,
+      selectedHour,
+      shouldLoadHours,
+      shouldLoadDates,
+    } = this.state;
+
     return (
       <div className="search-results-box">
         <div className="results-data">
           <h4>Dostępni lekarze</h4>
           {availableDoctors == [] ?? <span>"Brak dostępnych lekarzy"</span>}
-          {availableDoctors.map((doctor) => {
+          {availableDoctors.map((doctor, index) => {
             return (
               <div
-                key={doctor.user_id?.toString()}
+                key={index}
                 id={doctor.user_id?.toString()}
                 className={
-                  chosenDoctorId ===
+                  selectedDoctorId ===
                   parseInt(doctor.user_id?.toString() as string)
                     ? activeAvailableButtonClass
                     : "available-button-box"
@@ -126,31 +149,49 @@ export class SearchConsultationResults extends React.Component<
           })}
         </div>
         <div className="line"></div>
-        <div className="results-data">
-          <h4>Dostępne Daty</h4>
-          {AvailableDates.map((dates) => {
-            return (
-              <div
-                className={
-                  chosenDate === dates.date
-                    ? activeAvailableButtonClass
-                    : "available-button-box"
-                }
-                id={dates.date}
-                onClick={this.handleDateClick}
-              >
-                {dates.display}
-              </div>
-            );
-          })}
-        </div>
+        {shouldLoadDates && (
+          <div className="results-data">
+            <h4>Dostępne Daty</h4>
+            {AvailableDates.map((dates, index) => {
+              return (
+                <div
+                  className={
+                    selectedDate === dates.date
+                      ? activeAvailableButtonClass
+                      : "available-button-box"
+                  }
+                  key={index}
+                  id={dates.date}
+                  onClick={this.handleDateClick}
+                >
+                  {dates.display}
+                </div>
+              );
+            })}
+          </div>
+        )}
         <div className="line"></div>
-        <div className="results-data">
-          <h4>Dostępne Godziny</h4>
-          {ActiveDayHours.map((hours) => {
-            return <div className="available-button-box">{hours}</div>;
-          })}
-        </div>
+        {shouldLoadHours && (
+          <div className="results-data">
+            <h4>Dostępne Godziny</h4>
+            {this.state.activeDayHours.map((hour, index) => {
+              return (
+                <div
+                  key={index}
+                  id={hour.hour}
+                  className={
+                    selectedHour === hour.hour
+                      ? activeAvailableButtonClass
+                      : "available-button-box"
+                  }
+                  onClick={this.handleHourClick}
+                >
+                  {hour}
+                </div>
+              );
+            })}
+          </div>
+        )}
         <div className="line"></div>
         <div className="register-button">
           <input

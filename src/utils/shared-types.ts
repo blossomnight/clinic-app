@@ -34,4 +34,15 @@ export type ReservedConsultation = {
     user_id: string,
 }
 
+export type Medication = {
+    name: string,
+    price: number,
+
+}
+export type PrescriptionData = {
+    serial_number: number,
+    date: string,
+    medications?: Array<{medication: Medication}>
+}
+
 

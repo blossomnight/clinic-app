@@ -1,0 +1,18 @@
+.prescriptions-box {
+    height: 90vh;
+    display: flex;
+}
+
+.prescriptions-search {
+    width: 70%;
+}
+
+.search-box.right {
+    float:right;
+}
+
+.prescription-archive-row {
+    display:flex;
+    height: 30px;
+    width: 100%;
+}

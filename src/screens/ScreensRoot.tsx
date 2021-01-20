@@ -3,7 +3,7 @@ import { ScreenUserForm } from "./Form/ScreenUserForm";
 import { ScreenUserHome } from "./Home/ScreenUserHome";
 import { ScreenType } from "../utils/shared-types";
 import { ScreenTestResults } from "./TestResults/ScreenTestResults";
-import { ScreenConsultations } from "./Consultations/ScreenConsultations";
+import { ScreenMyConsultations } from "./MyConsultations/ScreenMyConsultations";
 import { ScreenCreateConsultation } from "./CreateConsultation/ScreenCreateConsultation";
 import { ScreenPrescriptions } from "./Prescriptions/ScreenPrescriptions";
 import {
@@ -12,6 +12,8 @@ import {
   Route,
   useRouteMatch,
 } from "react-router-dom";
+
+import TopMenu from "../components/TopMenu/TopMenu";
 
 type ScreensRootState = {
   isLoggedIn: boolean;
@@ -22,11 +24,12 @@ type ScreensRootProps = {};
 
 class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   state: ScreensRootState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     currentScreen: <></>,
   };
 
   handleUserAuthenticated = (): void => {
+    let username = localStorage.getItem("username") ?? "";
     this.setState({
       isLoggedIn: true,
     });
@@ -61,7 +64,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
         break;
       case ScreenType[ScreenType.TypeConsultations]:
         this.setState({
-          currentScreen: <ScreenConsultations />,
+          currentScreen: <ScreenMyConsultations />,
         });
         break;
       case ScreenType[ScreenType.TypeCreateConsultation]:
@@ -82,11 +85,14 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
     });
   }
 
+  handleLogOut = (): void => {};
+
   render() {
     //let match = useRouteMatch();
     const { isLoggedIn, currentScreen } = this.state;
     return (
       <div className="root">
+        {isLoggedIn && <TopMenu onLogOut={this.handleLogOut} />}
         {!isLoggedIn && (
           <ScreenUserForm onUserAuthenticated={this.handleUserAuthenticated} />
         )}

@@ -1,7 +1,6 @@
 import React from "react";
 import SignInForm from "../../components/Form/SignInForm";
 import { SignUpForm } from "../../components/Form/SignUpForm";
-import TopMenu from "../../components/TopMenu/TopMenu";
 import { UserType } from "../../utils/shared-types";
 import "./ScreenUserForm.css";
 
@@ -32,7 +31,6 @@ export let sendUserData = (
   } else {
     url = API_URL + action;
   }
-  console.log(bodyData);
   return fetch(url, {
     method: method,
     mode: "cors",
@@ -49,13 +47,15 @@ type ScreenUserFormProps = {
 
 let validateUserToken = (): Promise<Response> => {
   let bodyData = localStorage.getItem("token");
+  let token_validate: string = "Bearer " + bodyData;
   return fetch(API_URL + "details", {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: token_validate,
     },
-    body: JSON.stringify(bodyData),
   });
 };
 
@@ -67,7 +67,7 @@ export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
   componentDidMount() {
     if (localStorage.getItem("token") !== null) {
       validateUserToken()
-        .then((response) => console.log())
+        .then((response) => console.log(response))
         .catch((error) => console.log(error));
       this.props.onUserAuthenticated();
     }
@@ -76,7 +76,6 @@ export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
   render() {
     return (
       <div className="screen-user-form">
-        <TopMenu />
         <div className="user-form">
           <SignInForm onUserAuthenticated={this.props.onUserAuthenticated} />
           <SignUpForm />

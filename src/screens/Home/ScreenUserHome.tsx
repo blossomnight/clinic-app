@@ -1,5 +1,5 @@
 import React from "react";
-import TopMenu from "../../components/TopMenu/TopMenu";
+
 import "./ScreenUserHome.css";
 import { ScreenType } from "../../utils/shared-types";
 
@@ -10,7 +10,6 @@ export class ScreenUserHome extends React.Component<ScreenUserHomeProps> {
   render() {
     return (
       <div className="screen user-home">
-        <TopMenu />
         <div className="screen-choice-grid" onClick={this.props.onScreenChoice}>
           <div className="buttons-wrapper">
             <div>
@@ -34,11 +33,12 @@ export class ScreenUserHome extends React.Component<ScreenUserHomeProps> {
               >
                 {"Umów wizytę"}
               </button>
+
               <button
                 name={ScreenType[ScreenType.TypeConsultations]}
                 className="screen-choice-button"
               >
-                {"Umów Konsultację"}
+                {"Twoje wizyty"}
               </button>
             </div>
           </div>

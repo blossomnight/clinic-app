@@ -43,5 +43,17 @@
     height: 300px;
     margin-top: 10vh;
     position: absolute;
-    background-color: #bcbcbc;
+    background-color: #dfdfdf;
+}
+
+.menu-button {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-button:hover {
+    cursor: pointer;
+    background-color: gray;
 }

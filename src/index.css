@@ -50,17 +50,17 @@ body h3 {
 }
 
 ::-webkit-scrollbar {
-  /* width: 15px;
-  background:lightgray; */
-}
-
-::-webkit-scrollbar-track {
+  width: 9px;
+  height: 9px;
+ }
+ ::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
   border-radius: 15px;
-  background: none;
-}
-
-::-webkit-scrollbar-thumb {
+ }
+ ::-webkit-scrollbar-thumb:hover{
+  background: #7d7d7d;
+ }
+ ::-webkit-scrollbar-track{
+  background: #ffffff;
   border-radius: 15px;
-  background:gray;
-} 
-
+ }

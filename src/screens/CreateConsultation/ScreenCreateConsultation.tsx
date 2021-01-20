@@ -1,11 +1,12 @@
 import React from "react";
-import TopMenu from "../../components/TopMenu/TopMenu";
+
 import { SearchConsultationResults } from "../../components/SearchConsultationResults/SearchConsultationResults";
-import "./ScreenCreateConsultation.css";
-import Specializations from "../../utils/@Specialization-List.json";
-import { DentistsAvailability } from "../../mocks/DentistsAvailability";
 import { Spinner } from "../../utils/Spinner/Spinner";
 import { Header3 } from "../../utils/h3/Header3";
+import "./ScreenCreateConsultation.css";
+
+import Specializations from "../../utils/@Specialization-List.json";
+import { DentistsAvailability } from "../../mocks/DentistsAvailability";
 import { DoctorDetails } from "../../utils/shared-types";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -84,9 +85,8 @@ export class ScreenCreateConsultation extends React.Component {
   render() {
     return (
       <div className="screen create-consultation">
-        <TopMenu />
         <div className="consultations-box">
-          <div className="left-search-box">
+          <div className="functional-panel-box">
             <Header3
               iconName={"fi-rr-stethoscope"}
               contentText={"Rejestracja wizyt"}
