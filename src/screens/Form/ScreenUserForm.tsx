@@ -1,9 +1,11 @@
 import React from "react";
-import SignInForm from "../../../components/User/Form/SignInForm";
-import { SignUpForm, UserType } from "../../../components/User/Form/SignUpForm";
-import TopMenu from "../../../components/TopMenu/TopMenu";
+import SignInForm from "../../components/Form/SignInForm";
+import { SignUpForm } from "../../components/Form/SignUpForm";
+import TopMenu from "../../components/TopMenu/TopMenu";
+import { UserType } from "../../utils/shared-types";
 import "./ScreenUserForm.css";
-import { isDefaultClause } from "typescript";
+
+const API_URL = process.env.REACT_APP_API_URL_PROD;
 
 export type bodyData = {
   email: string;
@@ -14,27 +16,23 @@ export type bodyData = {
   specialization?: string;
 };
 
-const API_URL = process.env.REACT_APP_API_URL
-
 export let sendUserData = (
   bodyData: bodyData,
   action: string,
   method: string,
-  userType?: UserType,
+  userType?: UserType
 ): Promise<Response> => {
   let url = "";
-  if(action == "register"){
-    if(userType == UserType.Doctor){
+  if (action === "register") {
+    if (userType === UserType.Doctor) {
       url = API_URL + action + "_doctor";
-    }
-    else{
+    } else {
       url = API_URL + action;
     }
-  }
-  else{
+  } else {
     url = API_URL + action;
   }
-  
+
   return fetch(url, {
     method: method,
     mode: "cors",
@@ -49,15 +47,28 @@ type ScreenUserFormProps = {
   onUserAuthenticated: () => void;
 };
 
+let validateUserToken = (): Promise<Response> => {
+  let bodyData = localStorage.getItem("token");
+  return fetch(API_URL + "details", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+};
+
 export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
   constructor(props: ScreenUserFormProps) {
     super(props);
   }
 
   componentDidMount() {
-    //localStorage.setItem("token", data["success"]["token"]);
-    if (localStorage.getItem("token") !== null)
-    {
+    if (localStorage.getItem("token") !== null) {
+      validateUserToken()
+        .then((response) => console.log())
+        .catch((error) => console.log(error));
       this.props.onUserAuthenticated();
     }
   }

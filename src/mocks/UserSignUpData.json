@@ -1,0 +1,12 @@
+{
+  "User1": {
+    "userName": "Userr",
+    "userSurname": "User",
+    "userPesel": "1209120",
+    "userEmail": "user1@gmail.com",
+    "userPassword": "PASS",
+    "userRetypePassword": "PASS",
+    "userSpecialization": "None"
+  },
+  "User2": {}
+}

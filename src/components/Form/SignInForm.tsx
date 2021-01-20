@@ -1,10 +1,7 @@
 import React from "react";
 import "./SignInForm.css";
 import "./SignUpForm.css";
-import {
-  sendUserData,
-  bodyData,
-} from "../../../screens/User/Form/ScreenUserForm";
+import { sendUserData, bodyData } from "../../screens/Form/ScreenUserForm";
 
 type SignInFormState = {
   userEmail: string;
@@ -42,11 +39,9 @@ class SignInForm extends React.Component<SignInFormProps> {
         this.setState({
           loginFailed: false,
         });
-        promise.then((response: Response) =>
-          response.json().then((data) => {
-            localStorage.setItem("token", data["success"]["token"]);
-          })
-        );
+        response.json().then((data) => {
+          localStorage.setItem("token", data["success"]["token"]);
+        });
         this.props.onUserAuthenticated();
       } else {
         this.setState({
