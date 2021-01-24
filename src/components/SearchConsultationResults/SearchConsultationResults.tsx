@@ -1,7 +1,12 @@
 import React from "react";
 import "./SearchConsultationResults.css";
 import { DoctorDetails, ReservedConsultation } from "../../utils/shared-types";
-import { ConvertToUnixTime, getAvailableHours } from "../../utils/numerical";
+import {
+  generateNextDays,
+  getAvailableHours,
+  toEpochTime,
+} from "../../utils/numerical";
+import reportWebVitals from "../../reportWebVitals";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -18,29 +23,6 @@ type SearchConsultationResultsState = {
   activeDayHours: Array<{ hour: string; available: boolean }>;
 };
 
-const AvailableDates: Array<{ date: string; display: string }> = [
-  {
-    date: "2021.0.17",
-    display: "17 styczeń 2021",
-  },
-  {
-    date: "2021.0.18",
-    display: "18 styczeń 2021",
-  },
-  {
-    date: "2021.0.19",
-    display: "19 styczeń 2021",
-  },
-  {
-    date: "2021.0.20",
-    display: "20 styczeń 2021",
-  },
-  {
-    date: "2021.0.21",
-    display: "21 styczeń 2021",
-  },
-];
-
 export class SearchConsultationResults extends React.Component<
   SearchConsultationResultsProps,
   SearchConsultationResultsState
@@ -55,21 +37,52 @@ export class SearchConsultationResults extends React.Component<
   };
 
   sendConsultationRegisterData = (): void => {
-    // fetch(API_URL + "visits", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(bodyData),
-    // });
+    console.log(this.state);
+    const bodyData = {
+      doctor_id: this.state.selectedDoctorId,
+      date: toEpochTime(this.state.selectedDate, this.state.selectedHour),
+      user_id: Number.parseInt(localStorage.getItem("user_id") ?? "0"),
+    };
+    const body = JSON.stringify(bodyData);
+    console.log(body);
+    fetch(API_URL + "visits", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    }).then((response: Response) => {
+      console.log(response);
+      if (response.ok) {
+        alert("Poprawnie zarejestrowano wizytę");
+        this.props.availableDoctors
+          .find(
+            doc => Number.parseInt(doc.user_id ?? "0") == this.state.selectedDoctorId
+            )
+          ?.visits.push({ date: bodyData.date.toString() });
+        this.state.activeDayHours = getAvailableHours(
+          this.state.selectedDoctorId,
+          this.state.selectedDate,
+          this.props.availableDoctors
+        );
+      } else {
+        alert("Nie udało się zarejestrować wizyty");
+      }
+    });
   };
 
   handleConsultationRegister = (event: React.MouseEvent): void => {
-    alert("Wizyta zarejestrowana");
+    if (
+      this.state.selectedDoctorId == NaN ||
+      this.state.selectedDate == "" ||
+      this.state.selectedHour == ""
+    ) {
+      alert("Zaznacz wszystkie potrzebne informacje");
+      return;
+    }
     //Info, ze udalo się zarejestrować wizytę
     //POST na API z wybranymi danymi
-
     this.sendConsultationRegisterData();
   };
 
@@ -77,11 +90,15 @@ export class SearchConsultationResults extends React.Component<
     let doctorId = parseInt(
       event.currentTarget.getAttribute("id")?.toString() as string
     );
+    if (this.state.selectedDoctorId === doctorId) return; // Nic się nie zmieniło, można wyjść z funkcji
     this.setState({
       selectedDoctorId: doctorId,
+      selectedDate: "",
+      selectedHour: "",
       shouldLoadDates: true,
+      shouldLoadHours: false,
     });
-  };
+  };;
 
   handleDateClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     let selectedDate: string = event.currentTarget.getAttribute("id") as string;
@@ -90,13 +107,10 @@ export class SearchConsultationResults extends React.Component<
       available: boolean;
     }> = getAvailableHours(
       this.state.selectedDoctorId,
-      this.state.selectedDate,
+      selectedDate,
       this.props.availableDoctors
     );
 
-    console.log(selectedDate);
-    console.log(activeDayHours);
-    //wywala tu apke
     this.setState({
       selectedDate: selectedDate,
       shouldLoadHours: true,
@@ -155,7 +169,7 @@ export class SearchConsultationResults extends React.Component<
         {shouldLoadDates && (
           <div className="results-data">
             <h4>Dostępne Daty</h4>
-            {AvailableDates.map((dates, index) => {
+            {generateNextDays(5).map((dates, index) => {
               return (
                 <div
                   className={
@@ -189,7 +203,7 @@ export class SearchConsultationResults extends React.Component<
                         : "available-button-box"
                       : unavailableButtonClass
                   }
-                  onClick={hour.available ? this.handleHourClick : () => { }}
+                  onClick={hour.available ? this.handleHourClick : () => {}}
                 >
                   {hour.hour}
                 </div>

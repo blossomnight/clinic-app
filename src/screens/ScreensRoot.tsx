@@ -37,6 +37,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   handleUserLogout = (): void => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("user_id");
     this.setState({
       isLoggedIn: false,
     });

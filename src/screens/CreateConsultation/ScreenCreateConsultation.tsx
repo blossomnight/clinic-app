@@ -46,14 +46,12 @@ export class ScreenCreateConsultation extends React.Component {
 
   handleSpecializationOnClick = (event: React.MouseEvent): void => {
     const { innerHTML } = event.target as HTMLDivElement;
-    console.log(innerHTML);
 
     this.setState({ spinner: true });
 
     var params = { specialization: innerHTML };
     let url = new URLSearchParams(params).toString();
     url = API_URL + "doctors_specialization?" + url;
-    console.log(url);
     let promise = fetch(url, {
       method: "GET",
       mode: "cors",
@@ -66,12 +64,11 @@ export class ScreenCreateConsultation extends React.Component {
       response.json().then((data) => {
         // ustaw STATE z tablicą availableDoctors
         const result: DoctorDetails = data;
-        console.log(data);
         this.setState({
           availableDoctors: result,
           chosenSpecialization: true,
+          spinner: false,
         });
-        this.setState({ spinner: false });
       });
     });
 
