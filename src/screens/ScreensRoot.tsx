@@ -24,18 +24,19 @@ type ScreensRootProps = {};
 
 class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   state: ScreensRootState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     currentScreen: <></>,
   };
 
   handleUserAuthenticated = (): void => {
-    let username = localStorage.getItem("username") ?? "";
     this.setState({
       isLoggedIn: true,
     });
   };
 
   handleUserLogout = (): void => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
     this.setState({
       isLoggedIn: false,
     });
@@ -85,14 +86,12 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
     });
   }
 
-  handleLogOut = (): void => {};
-
   render() {
     //let match = useRouteMatch();
     const { isLoggedIn, currentScreen } = this.state;
     return (
       <div className="root">
-        {isLoggedIn && <TopMenu onLogOut={this.handleLogOut} />}
+        {isLoggedIn && <TopMenu onLogOut={this.handleUserLogout} />}
         {!isLoggedIn && (
           <ScreenUserForm onUserAuthenticated={this.handleUserAuthenticated} />
         )}

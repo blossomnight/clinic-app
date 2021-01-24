@@ -42,9 +42,8 @@ class SignInForm extends React.Component<SignInFormProps> {
         response.json().then((data) => {
           localStorage.setItem("token", data["success"]["token"]);
           localStorage.setItem("username", data["user"]["name"]);
-          console.log(data);
+          this.props.onUserAuthenticated();
         });
-        this.props.onUserAuthenticated();
       } else {
         this.setState({
           loginFailed: true,
