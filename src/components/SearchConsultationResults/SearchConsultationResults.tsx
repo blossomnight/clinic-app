@@ -118,6 +118,7 @@ export class SearchConsultationResults extends React.Component<
 
   render() {
     const activeAvailableButtonClass = "available-button-box chosen";
+    const unavailableButtonClass = "available-button-box non-available";
     const { availableDoctors } = this.props;
     const {
       selectedDoctorId,
@@ -182,11 +183,13 @@ export class SearchConsultationResults extends React.Component<
                   key={index}
                   id={hour.hour}
                   className={
-                    selectedHour === hour.hour
-                      ? activeAvailableButtonClass
-                      : "available-button-box"
+                    hour.available
+                      ? selectedHour === hour.hour
+                        ? activeAvailableButtonClass
+                        : "available-button-box"
+                      : unavailableButtonClass
                   }
-                  onClick={this.handleHourClick}
+                  onClick={hour.available ? this.handleHourClick : () => { }}
                 >
                   {hour.hour}
                 </div>

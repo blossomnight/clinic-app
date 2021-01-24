@@ -38,7 +38,7 @@
     opacity: 0.2;
 }
 
-.available-button-box:hover{
+.available-button-box:not(.non-available):hover{
     opacity:0.4;
     transition: 0.3s;
     cursor: pointer;
