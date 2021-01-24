@@ -13,6 +13,31 @@
 
 .prescription-archive-row {
     display:flex;
-    height: 30px;
+    height: 55px;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.prescription-archive-row > p {
+    margin: auto;
+}
+
+.prescription-archive-row > .table-divider:before {
+    background-image: linear-gradient(#424242 35%, rgba(255,255,255,0) 0%);
+}
+
+.prescription-archive-row.row-names {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.prescription-archive-row.row-names:hover {
+    cursor: unset;
+    background-color: inherit;
+}
+
+.prescription-archive-row:hover {
+    background-color: #d6d6d6;
+    cursor: pointer;
 }

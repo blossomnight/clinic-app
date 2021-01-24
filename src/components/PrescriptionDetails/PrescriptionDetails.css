@@ -1,0 +1,28 @@
+.prescription-details-box {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+
+.details-box {
+    background-color: #dfdfdf;
+    width: 80%;
+    height: 55%;
+}
+
+.details-box-row {
+    display: flex;
+    justify-content: space-evenly
+}
+
+.details-box-row > p {
+    color: #666666;
+    font-size: 1.2rem;
+}
+
+.data-name {
+    color: #9f9f9f;
+} 

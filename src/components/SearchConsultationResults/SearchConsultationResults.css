@@ -38,6 +38,10 @@
     opacity: 0.2;
 }
 
+.available-button-box.non-available:hover {
+    cursor: normal;
+}
+
 .available-button-box:hover{
     opacity:0.4;
     transition: 0.3s;
@@ -47,3 +51,13 @@
 .available-button-box.chosen {
     background-color: #FF5C00;
 }
+
+.register-button {
+    width: 50%;
+}
+
+.register-button > input:hover{
+    background-color: #ea5400;
+    cursor: pointer;
+}
+

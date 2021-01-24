@@ -57,3 +57,8 @@
 .dropdown-content a:hover {background-color: #ddd; cursor: pointer;}
 
 .dropbutton:focus {outline: none;}
+
+.navigate-back {
+  width: 100%;
+  
+}

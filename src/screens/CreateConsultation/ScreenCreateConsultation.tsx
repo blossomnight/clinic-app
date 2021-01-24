@@ -13,33 +13,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 type ScreenCreateConsultationState = {
   availableDoctors: DoctorDetails[];
   chosenSpecialization: boolean;
-  spinner: false;
+  spinner: boolean;
 };
 
 export class ScreenCreateConsultation extends React.Component {
   state = {
-    availableDoctors: [
-      {
-        user_id: "1",
-        specialization: "Okulista",
-        name: "Hubert Okon",
-        visits: [
-          {
-            date: "1610746912569",
-          },
-        ],
-      },
-      {
-        user_id: "1",
-        specialization: "Okulista",
-        name: "Hubert Okon",
-        visits: [
-          {
-            date: "1610746912569",
-          },
-        ],
-      },
-    ],
+    availableDoctors: [],
     chosenSpecialization: false,
     spinner: false,
   };
@@ -64,7 +43,6 @@ export class ScreenCreateConsultation extends React.Component {
 
     promise.then((response: Response) => {
       response.json().then((data) => {
-        // ustaw STATE z tablicą availableDoctors
         const result: DoctorDetails = data;
         console.log(data);
         this.setState({
@@ -74,10 +52,6 @@ export class ScreenCreateConsultation extends React.Component {
         this.setState({ spinner: false });
       });
     });
-
-    // pobierz jsona z API
-    // ustaw go w state
-    // wyslij w propsach do SearchConsultationResults
   };
 
   componentDidMount() {}
@@ -87,6 +61,10 @@ export class ScreenCreateConsultation extends React.Component {
       <div className="screen create-consultation">
         <div className="consultations-box">
           <div className="functional-panel-box">
+            <div className="navigate-back">
+              {"Wróć"}
+              <i className="fi-rr-angle-small-left"></i>
+            </div>
             <Header3
               iconName={"fi-rr-stethoscope"}
               contentText={"Rejestracja wizyt"}

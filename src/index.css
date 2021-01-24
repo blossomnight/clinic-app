@@ -26,9 +26,9 @@ button:focus {
   box-sizing: border-box;
 }
 
-button[type="button"] {
-  font-family: "Work Sans";
-  background-color: #8d9685;
+button[type="button"], input[type="button" i] {
+  width: 100%;
+  background-color: #ff5c00;
   border: none;
   outline: none;
   padding: 17px;
@@ -40,7 +40,7 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
-  background-color: #778070;
+  background-color: #ea5400;
   cursor: pointer;
 }
 

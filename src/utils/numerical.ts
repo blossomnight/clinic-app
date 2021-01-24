@@ -51,3 +51,4 @@ export let getAvailableHours = (
   });
     return availableVisits;
 };
+

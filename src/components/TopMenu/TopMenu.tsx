@@ -1,6 +1,7 @@
 import React from "react";
 import "./TopMenu.css";
 import CSS from "csstype";
+import Logo from "../../utils/Logo/Logo";
 
 type TopMenuProps = {
   onLogOut: () => void;
@@ -34,6 +35,7 @@ class TopMenu extends React.Component<TopMenuProps> {
   handleSignOut = (): void => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
     window.location.reload();
   };
   render() {
@@ -44,6 +46,9 @@ class TopMenu extends React.Component<TopMenuProps> {
     };
     return (
       <div className="top-menu">
+        <div className="logo-wrapper">
+          <Logo />
+        </div>
         <div className="user-menu" onClick={this.handleShowDropDown}>
           <div className="icon-wrapper">
             <i className="fi-rr-user"></i>

@@ -1,7 +1,11 @@
 import React from "react";
 import "./SearchConsultationResults.css";
 import { DoctorDetails, ReservedConsultation } from "../../utils/shared-types";
-import { ConvertToUnixTime, getAvailableHours } from "../../utils/numerical";
+import {
+  ConvertToUnixTime,
+  getAvailableHours,
+  generateNextDays,
+} from "../../utils/numerical";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -18,28 +22,10 @@ type SearchConsultationResultsState = {
   activeDayHours: Array<{ hour: string; available: boolean }>;
 };
 
-const AvailableDates: Array<{ date: string; display: string }> = [
-  {
-    date: "2021.0.17",
-    display: "17 styczeń 2021",
-  },
-  {
-    date: "2021.0.18",
-    display: "18 styczeń 2021",
-  },
-  {
-    date: "2021.0.19",
-    display: "19 styczeń 2021",
-  },
-  {
-    date: "2021.0.20",
-    display: "20 styczeń 2021",
-  },
-  {
-    date: "2021.0.21",
-    display: "21 styczeń 2021",
-  },
-];
+const AvailableDates: Array<{
+  date: string;
+  display: string;
+}> = generateNextDays();
 
 export class SearchConsultationResults extends React.Component<
   SearchConsultationResultsProps,
@@ -51,26 +37,30 @@ export class SearchConsultationResults extends React.Component<
     selectedHour: "",
     shouldLoadHours: false,
     shouldLoadDates: false,
-    activeDayHours: [{ hour: "", available: true }],
+    activeDayHours: [{ hour: "", available: false }],
   };
 
-  sendConsultationRegisterData = (): void => {
-    // fetch(API_URL + "visits", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(bodyData),
-    // });
-  };
+  sendConsultationRegisterData = (): void => {};
 
   handleConsultationRegister = (event: React.MouseEvent): void => {
     alert("Wizyta zarejestrowana");
-    //Info, ze udalo się zarejestrować wizytę
-    //POST na API z wybranymi danymi
 
-    this.sendConsultationRegisterData();
+    const bodyData = {
+      doctor_id: this.state.selectedDoctorId.toString(),
+      date: 1611658845,
+      user_id: localStorage.getItem("userId"),
+    };
+    const token = "Bearer " + localStorage.getItem("token");
+    console.log(bodyData);
+    fetch(API_URL + "visits", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(bodyData),
+    }).then((res: Response) => console.log(res));
   };
 
   handleDoctorClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -85,6 +75,7 @@ export class SearchConsultationResults extends React.Component<
 
   handleDateClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     let selectedDate: string = event.currentTarget.getAttribute("id") as string;
+
     const activeDayHours: Array<{
       hour: string;
       available: boolean;
@@ -94,7 +85,9 @@ export class SearchConsultationResults extends React.Component<
       this.props.availableDoctors
     );
 
-    //wywala tu apke
+    console.log(activeDayHours);
+    // BLAD - zwraca wszystkie jako available: true
+
     this.setState({
       selectedDate: selectedDate,
       shouldLoadHours: true,
@@ -102,8 +95,6 @@ export class SearchConsultationResults extends React.Component<
     });
 
     // potem wyswietlac jeszcze te niedostepne jako wyszarzone
-
-    // generateAvailableHours -> Array<{hour: string, available: boolean}>
   };
 
   handleHourClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -129,7 +120,9 @@ export class SearchConsultationResults extends React.Component<
       <div className="search-results-box">
         <div className="results-data">
           <h4>Dostępni lekarze</h4>
-          {availableDoctors == [] ?? <span>"Brak dostępnych lekarzy"</span>}
+          {availableDoctors.length == 0 ?? (
+            <span>"Brak dostępnych lekarzy"</span>
+          )}
           {availableDoctors.map((doctor, index) => {
             return (
               <div
@@ -182,11 +175,13 @@ export class SearchConsultationResults extends React.Component<
                   className={
                     selectedHour === hour.hour
                       ? activeAvailableButtonClass
-                      : "available-button-box"
+                      : "available-button-box" && hour.available
+                      ? "available-button-box"
+                      : "available-button-box non-available"
                   }
                   onClick={this.handleHourClick}
                 >
-                  {hour}
+                  {hour.hour}
                 </div>
               );
             })}

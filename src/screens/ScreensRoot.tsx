@@ -24,7 +24,7 @@ type ScreensRootProps = {};
 
 class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   state: ScreensRootState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     currentScreen: <></>,
   };
 
