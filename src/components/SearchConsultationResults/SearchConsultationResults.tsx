@@ -2,10 +2,11 @@ import React from "react";
 import "./SearchConsultationResults.css";
 import { DoctorDetails, ReservedConsultation } from "../../utils/shared-types";
 import {
-  ConvertToUnixTime,
-  getAvailableHours,
   generateNextDays,
+  getAvailableHours,
+  toEpochTime,
 } from "../../utils/numerical";
+import reportWebVitals from "../../reportWebVitals";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -22,11 +23,6 @@ type SearchConsultationResultsState = {
   activeDayHours: Array<{ hour: string; available: boolean }>;
 };
 
-const AvailableDates: Array<{
-  date: string;
-  display: string;
-}> = generateNextDays();
-
 export class SearchConsultationResults extends React.Component<
   SearchConsultationResultsProps,
   SearchConsultationResultsState
@@ -40,36 +36,68 @@ export class SearchConsultationResults extends React.Component<
     activeDayHours: [{ hour: "", available: false }],
   };
 
-  sendConsultationRegisterData = (): void => {};
-
-  handleConsultationRegister = (event: React.MouseEvent): void => {
-    alert("Wizyta zarejestrowana");
-
+  sendConsultationRegisterData = (): void => {
+    console.log(this.state);
     const bodyData = {
-      doctor_id: this.state.selectedDoctorId.toString(),
-      date: 1611658845,
-      user_id: localStorage.getItem("userId"),
+      doctor_id: this.state.selectedDoctorId,
+      date: toEpochTime(this.state.selectedDate, this.state.selectedHour),
+      user_id: Number.parseInt(localStorage.getItem("user_id") ?? "0"),
     };
-    const token = "Bearer " + localStorage.getItem("token");
-    console.log(bodyData);
+    const body = JSON.stringify(bodyData);
+    console.log(body);
     fetch(API_URL + "visits", {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
-      body: JSON.stringify(bodyData),
-    }).then((res: Response) => console.log(res));
+      body: body,
+    }).then((response: Response) => {
+      console.log(response);
+      if (response.ok) {
+        alert("Poprawnie zarejestrowano wizytę");
+        this.props.availableDoctors
+          .find(
+            (doc) =>
+              Number.parseInt(doc.user_id ?? "0") == this.state.selectedDoctorId
+          )
+          ?.visits.push({ date: bodyData.date.toString() });
+        this.state.activeDayHours = getAvailableHours(
+          this.state.selectedDoctorId,
+          this.state.selectedDate,
+          this.props.availableDoctors
+        );
+      } else {
+        alert("Nie udało się zarejestrować wizyty");
+      }
+    });
+  };
+
+  handleConsultationRegister = (event: React.MouseEvent): void => {
+    if (
+      this.state.selectedDoctorId == NaN ||
+      this.state.selectedDate == "" ||
+      this.state.selectedHour == ""
+    ) {
+      alert("Zaznacz wszystkie potrzebne informacje");
+      return;
+    }
+    //Info, ze udalo się zarejestrować wizytę
+    //POST na API z wybranymi danymi
+    this.sendConsultationRegisterData();
   };
 
   handleDoctorClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     let doctorId = parseInt(
       event.currentTarget.getAttribute("id")?.toString() as string
     );
+    if (this.state.selectedDoctorId === doctorId) return; // Nic się nie zmieniło, można wyjść z funkcji
     this.setState({
       selectedDoctorId: doctorId,
+      selectedDate: "",
+      selectedHour: "",
       shouldLoadDates: true,
+      shouldLoadHours: false,
     });
   };
 
@@ -81,20 +109,15 @@ export class SearchConsultationResults extends React.Component<
       available: boolean;
     }> = getAvailableHours(
       this.state.selectedDoctorId,
-      this.state.selectedDate,
+      selectedDate,
       this.props.availableDoctors
     );
-
-    console.log(activeDayHours);
-    // BLAD - zwraca wszystkie jako available: true
 
     this.setState({
       selectedDate: selectedDate,
       shouldLoadHours: true,
       activeDayHours: activeDayHours,
     });
-
-    // potem wyswietlac jeszcze te niedostepne jako wyszarzone
   };
 
   handleHourClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -107,6 +130,7 @@ export class SearchConsultationResults extends React.Component<
 
   render() {
     const activeAvailableButtonClass = "available-button-box chosen";
+    const unavailableButtonClass = "available-button-box non-available";
     const { availableDoctors } = this.props;
     const {
       selectedDoctorId,
@@ -145,7 +169,7 @@ export class SearchConsultationResults extends React.Component<
         {shouldLoadDates && (
           <div className="results-data">
             <h4>Dostępne Daty</h4>
-            {AvailableDates.map((dates, index) => {
+            {generateNextDays(5).map((dates, index) => {
               return (
                 <div
                   className={
@@ -173,13 +197,13 @@ export class SearchConsultationResults extends React.Component<
                   key={index}
                   id={hour.hour}
                   className={
-                    selectedHour === hour.hour
-                      ? activeAvailableButtonClass
-                      : "available-button-box" && hour.available
-                      ? "available-button-box"
-                      : "available-button-box non-available"
+                    hour.available
+                      ? selectedHour === hour.hour
+                        ? activeAvailableButtonClass
+                        : "available-button-box"
+                      : unavailableButtonClass
                   }
-                  onClick={this.handleHourClick}
+                  onClick={hour.available ? this.handleHourClick : () => {}}
                 >
                   {hour.hour}
                 </div>

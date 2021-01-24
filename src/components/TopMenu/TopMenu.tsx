@@ -15,28 +15,21 @@ type TopMenuState = {
 class TopMenu extends React.Component<TopMenuProps> {
   state = {
     isDropDownVisible: false,
-    userName: "",
+    userName: localStorage.getItem("username") ?? "",
   };
   constructor(props: TopMenuProps) {
     super(props);
+    console.log(localStorage.getItem("username") ?? "pusto");
   }
 
   handleShowDropDown = (): void => {
     this.state.isDropDownVisible
       ? this.setState({
           isDropDownVisible: false,
-          userName: localStorage.getItem("username") ?? "",
         })
       : this.setState({
           isDropDownVisible: true,
-          userName: localStorage.getItem("username") ?? "",
         });
-  };
-  handleSignOut = (): void => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("userId");
-    window.location.reload();
   };
   render() {
     const dropDownIconStyle = (): CSS.Properties => {
@@ -80,7 +73,7 @@ class TopMenu extends React.Component<TopMenuProps> {
             </div>
             <div
               className="logout-button menu-button"
-              onClick={this.handleSignOut}
+              onClick={this.props.onLogOut}
             >
               <p>Wyloguj się</p>
               <div className="icon-wrapper">

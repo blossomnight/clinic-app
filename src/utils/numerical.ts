@@ -1,12 +1,10 @@
 import { DoctorDetails } from "../utils/shared-types";
 
-export let ConvertToUnixTime = (date: string, time: string) => {};
-
-export let generateNextDays = (): Array<{ date: string; display: string }> => {
+export let generateNextDays = (nof_days: number): Array<{ date: string; display: string }> => {
   let days: Array<Date> = [];
   days[0] = new Date();
-  for (let i = 1; i < 6; i++) {
-    days[i] = new Date(days[i - 1].getTime() + 1000 * 60 * 60 * 24);
+  for (let i = 0; i < nof_days; i++) {
+    days[i+1] = new Date(days[i].getTime() + 1000 * 60 * 60 * 24);
   }
   return days.slice(1).map((d) => {
     return {
@@ -52,3 +50,9 @@ export let getAvailableHours = (
     return availableVisits;
 };
 
+export let toEpochTime = (
+  date: string,
+  hour: string
+): number => {
+  return Date.parse(date + " " + hour);
+}
