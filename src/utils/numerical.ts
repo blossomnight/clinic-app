@@ -4,7 +4,7 @@ export let generateNextDays = (nof_days: number): Array<{ date: string; display:
   let days: Array<Date> = [];
   days[0] = new Date();
   for (let i = 0; i < nof_days; i++) {
-    days[i+1] = new Date(days[i].getTime() + 1000 * 60 * 60 * 24);
+    days[i + 1] = new Date(days[i].getTime() + 1000 * 60 * 60 * 24);
   }
   return days.slice(1).map((d) => {
     return {
@@ -47,7 +47,7 @@ export let getAvailableHours = (
       available: !visits.includes(obj.epoch.toString()),
     };
   });
-    return availableVisits;
+  return availableVisits;
 };
 
 export let toEpochTime = (
@@ -55,4 +55,14 @@ export let toEpochTime = (
   hour: string
 ): number => {
   return Date.parse(date + " " + hour);
+}
+
+export let fromEpochTime = (epoch: number): string => {
+  let date = new Date(epoch);
+  let day = date.getDate();
+  let month = date.toLocaleString("default", { month: "long" });
+  let year = date.getFullYear();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  return `${day} ${month} ${year}, ${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
 }
