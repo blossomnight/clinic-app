@@ -94,6 +94,8 @@ export class SearchConsultationResults extends React.Component<
       this.props.availableDoctors
     );
 
+    console.log(selectedDate);
+    console.log(activeDayHours);
     //wywala tu apke
     this.setState({
       selectedDate: selectedDate,
@@ -186,7 +188,7 @@ export class SearchConsultationResults extends React.Component<
                   }
                   onClick={this.handleHourClick}
                 >
-                  {hour}
+                  {hour.hour}
                 </div>
               );
             })}
