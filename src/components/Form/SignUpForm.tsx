@@ -4,7 +4,6 @@ import { bodyData, sendUserData } from "../../screens/Form/ScreenUserForm";
 import UserDataMock from "../../mocks/UserSignUpData.json";
 import { UserType } from "../../utils/shared-types";
 import Specializations from "../../utils/@Specialization-List.json";
-import CSS from "csstype";
 
 enum FormHeaderData {
   Doctor = "Jestem lekarzem",
@@ -26,7 +25,7 @@ type SignUpFormState = {
   dropDownVisible: boolean;
 };
 
-type SignUpFormProps = {};
+// type SignUpFormProps = {};
 
 export class SignUpForm extends React.Component {
   state: SignUpFormState = {
@@ -210,7 +209,7 @@ export class SignUpForm extends React.Component {
               {this.state.userType === UserType.Doctor && (
                 <div className="dropdown" onClick={this.handleDropDownOnClick}>
                   <button className="dropbutton">
-                    {this.state.userSpecialization == ""
+                    {this.state.userSpecialization === ""
                       ? "Wybierz specjalizację"
                       : `${this.state.userSpecialization}`}
                   </button>
@@ -224,7 +223,9 @@ export class SignUpForm extends React.Component {
                   >
                     {Specializations["Specialization"].map((data) => {
                       return (
-                        <a onClick={this.handleSpecializationChoice}>{data}</a>
+                        <div onClick={this.handleSpecializationChoice}>
+                          {data}
+                        </div>
                       );
                     })}
                   </div>

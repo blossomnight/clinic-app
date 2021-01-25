@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { ScreenUserForm } from "./Form/ScreenUserForm";
 import { ScreenUserHome } from "./Home/ScreenUserHome";
 import { ScreenType } from "../utils/shared-types";
@@ -6,12 +6,6 @@ import { ScreenTestResults } from "./TestResults/ScreenTestResults";
 import { ScreenMyConsultations } from "./MyConsultations/ScreenMyConsultations";
 import { ScreenCreateConsultation } from "./CreateConsultation/ScreenCreateConsultation";
 import { ScreenPrescriptions } from "./Prescriptions/ScreenPrescriptions";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useRouteMatch,
-} from "react-router-dom";
 
 import TopMenu from "../components/TopMenu/TopMenu";
 

@@ -60,10 +60,6 @@ let validateUserToken = (): Promise<Response> => {
 };
 
 export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
-  constructor(props: ScreenUserFormProps) {
-    super(props);
-  }
-
   componentDidMount() {
     if (localStorage.getItem("token") !== null) {
       validateUserToken()

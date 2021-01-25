@@ -28,7 +28,8 @@ export type DoctorDetails = {
 
 
 export type ReservedConsultation = {
-    date: string,
+    id: number,
+    date: number,
     doctor_id: number,
     doctor_name: string,
     specialization: string,

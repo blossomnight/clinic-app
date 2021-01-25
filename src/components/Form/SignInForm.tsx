@@ -20,10 +20,6 @@ class SignInForm extends React.Component<SignInFormProps> {
     loginFailed: false,
   };
 
-  constructor(props: SignInFormProps) {
-    super(props);
-  }
-
   handleFormOnSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
@@ -41,7 +37,6 @@ class SignInForm extends React.Component<SignInFormProps> {
         });
         response.json().then((data) => {
           localStorage.setItem("token", data["success"]["token"]);
-          localStorage.setItem("userId", data["user"]["id"]);
           localStorage.setItem("username", data["user"]["name"]);
           localStorage.setItem("user_id", data["user"]["id"]);
           this.props.onUserAuthenticated();

@@ -6,57 +6,8 @@ import { fromEpochTime } from "../../utils/numerical";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Visits: Array<ReservedConsultation> = [
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-  {
-    date: "1611504824",
-    doctor_id: 2,
-    specialization: "Okulista",
-    doctor_name: "NAME",
-  },
-];
-
 let visitToStringArray = (visit: ReservedConsultation): Array<string> => {
-  return [
-    fromEpochTime(Number.parseInt(visit.date)),
-    visit.doctor_name,
-    visit.specialization,
-  ];
+  return [fromEpochTime(visit.date), visit.doctor_name, visit.specialization];
 };
 
 type ScreenMyConsultationsProps = {};
@@ -70,7 +21,15 @@ export class ScreenMyConsultations extends React.Component<
   ScreenMyConsultationsState
 > {
   state = {
-    visits: Visits,
+    visits: [
+      {
+        id: NaN,
+        date: NaN,
+        doctor_id: NaN,
+        specialization: "",
+        doctor_name: "",
+      },
+    ],
   };
 
   componentDidMount() {
@@ -84,20 +43,40 @@ export class ScreenMyConsultations extends React.Component<
       },
     }).then((response: Response) => {
       response.json().then((data) => {
-        console.log(data);
         this.setState({ visits: data });
-        console.log("Visists set");
       });
-      // Load visits into this.state.visits
     });
+  }
+
+  removeVisit(index: number) {
+    let id = this.state.visits[index].id;
+    console.log("removing visit id", id);
+    fetch(API_URL + "visits/" + id, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((response: Response) => {
+      console.log(response);
+    });
+    this.setState({
+      visits: this.state.visits.filter((visit) => visit.id !== id),
+    });
+    alert("Poprawnie zrezygnowano z wizyty");
   }
 
   render() {
     return (
       <div className="screen consultations">
         <ListingContainer
-          mainData={this.state.visits.map((visit) => visitToStringArray(visit))}
+          mainData={this.state.visits
+            .sort((v1, v2) => v1.date - v2.date)
+            .map((visit) => visitToStringArray(visit))}
           headers={["Data", "Lekarz", "Specjalizacja"]}
+          buttonText={"Zrezygnuj"}
+          buttonCallback={this.removeVisit.bind(this)}
         />
       </div>
     );

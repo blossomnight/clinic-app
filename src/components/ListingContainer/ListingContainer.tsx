@@ -1,30 +1,43 @@
 import React from "react";
-import {
-  ReservedConsultation,
-  RowPlaceholders,
-} from "../../utils/shared-types";
+import { RowPlaceholders } from "../../utils/shared-types";
 import { DataRow } from "../../components/DataRow/DataRow";
-import TestsMock from "../../mocks/TestResultsListData.json";
-import HeadersData from "../../utils/@Listing-container-headers.json";
 import "./ListingContainer.css";
 
 type ListingContainerProps = {
   mainData: Array<Array<string>>;
   headers: Array<string>;
+  buttonText: string;
+  buttonCallback: (index: number) => void;
 };
 
 type ListingContainerState = {
   rows?: Array<RowPlaceholders>;
 };
-
 export class ListingContainer extends React.Component<
   ListingContainerProps,
   ListingContainerState
 > {
-  createDataRows = (): JSX.Element[] => {
-    return this.props.mainData.map((row) => {
-      return <DataRow placeholders={row}></DataRow>;
+  createDataRows = (): JSX.Element[][] => {
+    let arr = this.props.mainData.map((row, index) => {
+      return [
+        <DataRow placeholders={row}>lol</DataRow>,
+        this.props.buttonText  !==  "" ? (
+          <button value={index} onClick={this.handleButtonClick}>
+              {this.props.buttonText}
+            </button>
+        ) : (
+          (
+          <></>
+        )
+        ),
+      ];
     });
+    return arr;
+  };
+
+  handleButtonClick = (event: React.MouseEvent): void => {
+    let value: any = event.currentTarget.getAttribute("value");
+    this.props.buttonCallback(value);
   };
 
   render() {

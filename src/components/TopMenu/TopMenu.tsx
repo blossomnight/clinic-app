@@ -12,15 +12,11 @@ type TopMenuState = {
   isDropDownVisible: boolean;
 };
 
-class TopMenu extends React.Component<TopMenuProps> {
+class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
   state = {
     isDropDownVisible: false,
     userName: localStorage.getItem("username") ?? "",
   };
-  constructor(props: TopMenuProps) {
-    super(props);
-    console.log(localStorage.getItem("username") ?? "pusto");
-  }
 
   handleShowDropDown = (): void => {
     this.state.isDropDownVisible

@@ -6,9 +6,10 @@ import { Header3 } from "../../utils/h3/Header3";
 import "./ScreenCreateConsultation.css";
 
 import Specializations from "../../utils/@Specialization-List.json";
-import { DentistsAvailability } from "../../mocks/DentistsAvailability";
 import { DoctorDetails } from "../../utils/shared-types";
 const API_URL = process.env.REACT_APP_API_URL;
+
+type ScreenCreateConsultationProps = {};
 
 type ScreenCreateConsultationState = {
   availableDoctors: DoctorDetails[];
@@ -16,7 +17,10 @@ type ScreenCreateConsultationState = {
   spinner: boolean;
 };
 
-export class ScreenCreateConsultation extends React.Component {
+export class ScreenCreateConsultation extends React.Component<
+  ScreenCreateConsultationProps,
+  ScreenCreateConsultationState
+> {
   state = {
     availableDoctors: [],
     chosenSpecialization: false,
@@ -41,7 +45,7 @@ export class ScreenCreateConsultation extends React.Component {
 
     promise.then((response: Response) => {
       response.json().then((data) => {
-        const result: DoctorDetails = data;
+        const result: DoctorDetails[] = data;
         this.setState({
           availableDoctors: result,
           chosenSpecialization: true,
@@ -72,9 +76,12 @@ export class ScreenCreateConsultation extends React.Component {
                 {Specializations["Specialization"].map(
                   (data, index: number) => {
                     return (
-                      <a key={index} onClick={this.handleSpecializationOnClick}>
+                      <div
+                        key={index}
+                        onClick={this.handleSpecializationOnClick}
+                      >
                         {data}
-                      </a>
+                      </div>
                     );
                   }
                 )}

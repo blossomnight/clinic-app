@@ -1,12 +1,11 @@
 import React from "react";
 import "./SearchConsultationResults.css";
-import { DoctorDetails, ReservedConsultation } from "../../utils/shared-types";
+import { DoctorDetails } from "../../utils/shared-types";
 import {
   generateNextDays,
   getAvailableHours,
   toEpochTime,
 } from "../../utils/numerical";
-import reportWebVitals from "../../reportWebVitals";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -59,14 +58,17 @@ export class SearchConsultationResults extends React.Component<
         this.props.availableDoctors
           .find(
             (doc) =>
-              Number.parseInt(doc.user_id ?? "0") == this.state.selectedDoctorId
+              Number.parseInt(doc.user_id ?? "0") ===
+              this.state.selectedDoctorId
           )
           ?.visits.push({ date: bodyData.date.toString() });
-        this.state.activeDayHours = getAvailableHours(
-          this.state.selectedDoctorId,
-          this.state.selectedDate,
-          this.props.availableDoctors
-        );
+        this.setState({
+          activeDayHours:  getAvailableHours(
+            this.state.selectedDoctorId,
+            this.state.selectedDate,
+            this.props.availableDoctors
+          ),
+        });
       } else {
         alert("Nie udało się zarejestrować wizyty");
       }
@@ -75,9 +77,9 @@ export class SearchConsultationResults extends React.Component<
 
   handleConsultationRegister = (event: React.MouseEvent): void => {
     if (
-      this.state.selectedDoctorId == NaN ||
-      this.state.selectedDate == "" ||
-      this.state.selectedHour == ""
+      isNaN(this.state.selectedDoctorId) ||
+      this.state.selectedDate === "" ||
+      this.state.selectedHour === ""
     ) {
       alert("Zaznacz wszystkie potrzebne informacje");
       return;
@@ -144,7 +146,7 @@ export class SearchConsultationResults extends React.Component<
       <div className="search-results-box">
         <div className="results-data">
           <h4>Dostępni lekarze</h4>
-          {availableDoctors.length == 0 ?? (
+          {availableDoctors.length === 0 ?? (
             <span>"Brak dostępnych lekarzy"</span>
           )}
           {availableDoctors.map((doctor, index) => {

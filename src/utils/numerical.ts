@@ -36,7 +36,7 @@ export let getAvailableHours = (
 ): Array<{ hour: string, available: boolean }> => {
   const visits =
     json
-      .find((x) => x.user_id == selectedDoctorId.toString())
+      .find((x) => x.user_id === selectedDoctorId.toString())
       ?.visits.map((v) => v.date) ?? [];
 
   const availableVisits = ActiveDayHours.map((str) => {
@@ -58,11 +58,13 @@ export let toEpochTime = (
 }
 
 export let fromEpochTime = (epoch: number): string => {
-  let date = new Date(epoch);
-  let day = date.getDate();
-  let month = date.toLocaleString("default", { month: "long" });
-  let year = date.getFullYear();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  return `${day} ${month} ${year}, ${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+  const date = new Date(epoch);
+  date.setTime(epoch);
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const result = `${day} ${month} ${year}, ${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+  return result;
 }
