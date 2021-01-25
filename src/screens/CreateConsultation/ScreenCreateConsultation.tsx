@@ -62,10 +62,6 @@ export class ScreenCreateConsultation extends React.Component<
       <div className="screen create-consultation">
         <div className="consultations-box">
           <div className="functional-panel-box">
-            <div className="navigate-back">
-              {"Wróć"}
-              <i className="fi-rr-angle-small-left"></i>
-            </div>
             <Header3
               iconName={"fi-rr-stethoscope"}
               contentText={"Rejestracja wizyt"}

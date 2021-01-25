@@ -37,6 +37,14 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
     });
   };
 
+  handleGoBack = (): void => {
+    this.setState({
+      currentScreen: (
+        <ScreenUserHome onScreenChoice={this.handleScreenChoice} />
+      ),
+    });
+  };
+
   // Dany Screen wysyła info jakim ScreenTypem jest
   // ScreensRoot procesuje tę informację i renderuje odpowiedni komponent
   // są pewne wątpliwości co do ustawiania state w componentDidMount()
@@ -86,7 +94,12 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
     const { isLoggedIn, currentScreen } = this.state;
     return (
       <div className="root">
-        {isLoggedIn && <TopMenu onLogOut={this.handleUserLogout} />}
+        {isLoggedIn && (
+          <TopMenu
+            onLogOut={this.handleUserLogout}
+            onGoBack={this.handleGoBack}
+          />
+        )}
         {!isLoggedIn && (
           <ScreenUserForm onUserAuthenticated={this.handleUserAuthenticated} />
         )}

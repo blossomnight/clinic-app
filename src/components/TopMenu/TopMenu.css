@@ -64,3 +64,20 @@
     height: 100%;
     width: auto;
 }
+
+.navigate-back {
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #FF5C00;
+    height: 50%;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigate-back:hover {
+    cursor: pointer;
+    background-color: #ea5400;
+}

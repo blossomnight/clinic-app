@@ -5,6 +5,7 @@ import Logo from "../../utils/Logo/Logo";
 
 type TopMenuProps = {
   onLogOut: () => void;
+  onGoBack: () => void;
 };
 
 type TopMenuState = {
@@ -27,6 +28,7 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
           isDropDownVisible: true,
         });
   };
+
   render() {
     const dropDownIconStyle = (): CSS.Properties => {
       return this.state.isDropDownVisible
@@ -37,6 +39,10 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
       <div className="top-menu">
         <div className="logo-wrapper">
           <Logo />
+        </div>
+        <div className="navigate-back" onClick={this.props.onGoBack}>
+          {"Wróć"}
+          <i className="fi-rr-angle-small-left"></i>
         </div>
         <div className="user-menu" onClick={this.handleShowDropDown}>
           <div className="icon-wrapper">
