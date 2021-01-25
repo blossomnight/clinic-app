@@ -18,7 +18,10 @@ export class ScreenTestResults extends React.Component {
           contentText={"Wyniki badań"}
         ></Header3>
         <div className="component-wrapper">
-          <ListingContainer />
+          <ListingContainer
+            mainData={[]}
+            headers={["Data", "Numer zlecenia", "Badania"]}
+          />
         </div>
       </div>
     );
