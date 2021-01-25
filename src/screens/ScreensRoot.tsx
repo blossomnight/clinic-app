@@ -48,7 +48,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   // Dany Screen wysyła info jakim ScreenTypem jest
   // ScreensRoot procesuje tę informację i renderuje odpowiedni komponent
   // są pewne wątpliwości co do ustawiania state w componentDidMount()
-  // poniewaz po odswiezeniu wracamy do HOME   ---------------------------------> ISSUE
+  // ponieważ po odświeżeniu wracamy do HOME   ---------------------------------> ISSUE
 
   handleScreenChoice = (event: React.MouseEvent<HTMLDivElement>): void => {
     // this.setState({ [event.target.name]: event.target.value });
@@ -61,7 +61,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
           currentScreen: <ScreenTestResults />,
         });
         break;
-      case ScreenType[ScreenType.TypePerscriptions]:
+      case ScreenType[ScreenType.TypePrescriptions]:
         this.setState({
           currentScreen: <ScreenPrescriptions />,
         });

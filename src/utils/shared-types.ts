@@ -7,7 +7,7 @@ export enum UserType {
 export enum ScreenType {
     None,
     TypeTestResults,
-    TypePerscriptions,
+    TypePrescriptions,
     TypeCreateConsultation,
     TypeConsultations
 }

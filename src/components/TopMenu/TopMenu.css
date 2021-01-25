@@ -66,13 +66,19 @@
 }
 
 .navigate-back {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 300px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     color: white;
     padding: 5px;
     border-radius: 20px;
     background-color: #FF5C00;
-    height: 50%;
+    height: 30px;
     display: flex;
-    flex-flow: row;
+    /* flex-flow: row; */
     justify-content: center;
     align-items: center;
 }

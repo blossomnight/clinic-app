@@ -20,7 +20,7 @@ export class ScreenUserHome extends React.Component<ScreenUserHomeProps> {
                 {"Wyniki Badań"}
               </button>
               <button
-                name={ScreenType[ScreenType.TypePerscriptions]}
+                name={ScreenType[ScreenType.TypePrescriptions]}
                 className="screen-choice-button"
               >
                 {"Odbierze E-receptę"}

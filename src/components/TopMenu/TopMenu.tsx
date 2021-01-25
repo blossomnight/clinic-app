@@ -40,7 +40,7 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
         <div className="logo-wrapper">
           <Logo />
         </div>
-        <div className="navigate-back" onClick={this.props.onGoBack}>
+        <div className="navigate-back center" onClick={this.props.onGoBack}>
           {"Wróć"}
           <i className="fi-rr-angle-small-left"></i>
         </div>
