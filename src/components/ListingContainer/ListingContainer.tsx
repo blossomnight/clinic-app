@@ -45,12 +45,17 @@ export class ListingContainer extends React.Component<
     return (
       <div className="listing-container">
         <div className="table-row table-header">
-          {this.props.headers.map((header) => {
-            return (
+          {this.props.headers.map((header, index) => {
+            return [
               <div className="table-headline">
                 <span>{header}</span>
-              </div>
-            );
+              </div>,
+              index !== this.props.headers.length - 1 ? (
+                <div className="table-cell table-divider"></div>
+              ) : (
+                <></>
+              ),
+            ];
           })}
         </div>
         <div className="table-content">{this.createDataRows()}</div>

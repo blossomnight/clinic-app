@@ -72,12 +72,11 @@
 
   .functional-button {
     position: absolute;
-    right: 0;
     margin-top: -70px;
     width: fit-content;
-    margin-left: -12px;
     display: flex;
     align-items: center;
+    margin-left: calc(100% - 350px);
   }
 
   .functional-button > button{

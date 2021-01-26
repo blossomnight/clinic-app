@@ -12,12 +12,20 @@ type TopMenuProps = {
 type TopMenuState = {
   userName: string;
   isDropDownVisible: boolean;
+  isAmbulanceVisible: boolean;
 };
 
 class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
   state = {
     isDropDownVisible: false,
+    isAmbulanceVisible: false,
     userName: localStorage.getItem("username") ?? "",
+  };
+
+  handleAmbulanceCall = (): void => {
+    this.setState({
+      isAmbulanceVisible: true,
+    });
   };
 
   handleShowDropDown = (): void => {
@@ -41,6 +49,12 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
         <div className="logo-wrapper">
           <Logo />
         </div>
+
+        {this.state.isAmbulanceVisible && (
+          <div className="ambulance">
+            <div className="ambulance-png"></div>
+          </div>
+        )}
         {this.props.isGoBackVisible && (
           <div className="navigate-back center" onClick={this.props.onGoBack}>
             {"Wróć"}
@@ -64,7 +78,10 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
                 <i className="fi-rr-edit" />
               </div>
             </div>
-            <div className="call-an-ambulance menu-button">
+            <div
+              className="call-an-ambulance menu-button"
+              onClick={this.handleAmbulanceCall}
+            >
               <p>Wezwij karetkę</p>
               <div className="icon-wrapper">
                 <i className="fi-rr-ambulance" />

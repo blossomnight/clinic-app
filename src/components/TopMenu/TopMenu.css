@@ -19,6 +19,11 @@
 
 }
 
+.user-menu > p {
+    display: fixed;
+    align-items: center;
+}
+
 .user-menu:hover {
     background-color: #ea5400;
     cursor: pointer;
@@ -86,4 +91,22 @@
 .navigate-back:hover {
     cursor: pointer;
     background-color: #ea5400;
+}
+
+.ambulance { 
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-color: lightcoral;
+    opacity: 0.5;
+
+}
+
+.ambulance-png {
+    background-image: url('https://assets.stickpng.com/images/5afac87….png');
+    background-repeat: no-repeat;
+    /* position: absolute; */
+    align-self: center;
+    width: 100%;
+    height: 100%;
 }
