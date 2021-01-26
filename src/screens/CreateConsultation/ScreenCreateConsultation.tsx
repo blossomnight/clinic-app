@@ -45,6 +45,7 @@ export class ScreenCreateConsultation extends React.Component<
 
     promise.then((response: Response) => {
       response.json().then((data) => {
+        console.log(data);
         const result: DoctorDetails[] = data;
         this.setState({
           availableDoctors: result,

@@ -54,7 +54,6 @@ export class SearchConsultationResults extends React.Component<
     }).then((response: Response) => {
       console.log(response);
       if (response.ok) {
-        alert("Poprawnie zarejestrowano wizytę");
         this.props.availableDoctors
           .find(
             (doc) =>
@@ -63,12 +62,13 @@ export class SearchConsultationResults extends React.Component<
           )
           ?.visits.push({ date: bodyData.date.toString() });
         this.setState({
-          activeDayHours:  getAvailableHours(
+          activeDayHours: getAvailableHours(
             this.state.selectedDoctorId,
             this.state.selectedDate,
             this.props.availableDoctors
           ),
         });
+        alert("Poprawnie zarejestrowano wizytę");
       } else {
         alert("Nie udało się zarejestrować wizyty");
       }

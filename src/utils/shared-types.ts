@@ -35,16 +35,11 @@ export type ReservedConsultation = {
     specialization: string,
 }
 
-export type Medication = {
-    medicationId: number,
-    name: string,
-    price: number,
-
-}
 export type PrescriptionData = {
     serialNumber: number,
     date: string,
-    medications?: Array<Medication>
+    doctor: string,
+    medications: Array<string>
 }
 
 export type TestResult = {
