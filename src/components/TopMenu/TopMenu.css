@@ -20,7 +20,7 @@
 }
 
 .user-menu > p {
-    display: fixed;
+    display: flex;
     align-items: center;
 }
 
