@@ -6,6 +6,7 @@ import Logo from "../../utils/Logo/Logo";
 type TopMenuProps = {
   onLogOut: () => void;
   onGoBack: () => void;
+  isGoBackVisible: boolean;
 };
 
 type TopMenuState = {
@@ -40,10 +41,12 @@ class TopMenu extends React.Component<TopMenuProps, TopMenuState> {
         <div className="logo-wrapper">
           <Logo />
         </div>
-        <div className="navigate-back center" onClick={this.props.onGoBack}>
-          {"Wróć"}
-          <i className="fi-rr-angle-small-left"></i>
-        </div>
+        {this.props.isGoBackVisible && (
+          <div className="navigate-back center" onClick={this.props.onGoBack}>
+            {"Wróć"}
+            <i className="fi-rr-angle-small-left"></i>
+          </div>
+        )}
         <div className="user-menu" onClick={this.handleShowDropDown}>
           <div className="icon-wrapper">
             <i className="fi-rr-user"></i>

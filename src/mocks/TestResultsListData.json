@@ -1,52 +1,18 @@
 {
   "tests": [
     {
+      "id": "0",
+      "code": "0123456789",
       "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
+      "testType": "ALT, BTC - Pobranie materiału",
+      "laboratory": "21-030 Lublin Al.Lotników Polskich 18"
     },
     {
+      "id": "1",
+      "code": "0123456789",
       "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
-    },
-    {
-      "date": "12 września 2020",
-      "orderNumber": "0123456789",
-      "takenTests": "ALT, BTC - Pobranie materiału",
-      "department": "21-030 Lublin Al.Lotników Polskich 18"
+      "testType": "ALT, BTC - Pobranie materiału",
+      "laboratory": "21-030 Lublin Al.Lotników Polskich 18"
     }
   ]
 }

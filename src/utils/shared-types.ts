@@ -47,4 +47,11 @@ export type PrescriptionData = {
     medications?: Array<Medication>
 }
 
+export type TestResult = {
+    date: string,
+    code: string,
+    testType: string,
+    laboratory: string,
+}
+
 

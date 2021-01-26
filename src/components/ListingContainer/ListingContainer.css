@@ -69,3 +69,26 @@
     right: 0;
     margin-top: 135px;
   }
+
+  .functional-button {
+    position: absolute;
+    right: 0;
+    margin-top: -70px;
+    width: fit-content;
+    margin-left: -12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .functional-button > button{
+    outline: none;
+    border: none;
+    padding: 15px;
+  }
+
+  .functional-button > button:hover {
+      opacity: 0.7;
+      cursor: pointer;
+  }
+
+  

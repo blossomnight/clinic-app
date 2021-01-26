@@ -2,6 +2,7 @@ import React from "react";
 import SignInForm from "../../components/Form/SignInForm";
 import { SignUpForm } from "../../components/Form/SignUpForm";
 import { UserType } from "../../utils/shared-types";
+import Icon from "../../utils/Logo/Logo";
 import "./ScreenUserForm.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -72,6 +73,11 @@ export class ScreenUserForm extends React.Component<ScreenUserFormProps> {
   render() {
     return (
       <div className="screen-user-form">
+        <div style={{ height: "60px" }}>
+          <div className="logo-wrapper">
+            <Icon />
+          </div>
+        </div>
         <div className="user-form">
           <SignInForm onUserAuthenticated={this.props.onUserAuthenticated} />
           <SignUpForm />

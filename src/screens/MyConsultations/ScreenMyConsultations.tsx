@@ -6,7 +6,7 @@ import { fromEpochTime } from "../../utils/numerical";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-let visitToStringArray = (visit: ReservedConsultation): Array<string> => {
+const visitToStringArray = (visit: ReservedConsultation): Array<string> => {
   return [fromEpochTime(visit.date), visit.doctor_name, visit.specialization];
 };
 

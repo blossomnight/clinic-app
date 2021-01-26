@@ -21,14 +21,15 @@ export class ListingContainer extends React.Component<
     let arr = this.props.mainData.map((row, index) => {
       return [
         <DataRow placeholders={row}>lol</DataRow>,
-        this.props.buttonText  !==  "" ? (
-          <button value={index} onClick={this.handleButtonClick}>
+        this.props.buttonText !== "" ? (
+          <div className="functional-button">
+            <i className=" fi-rr-cross-circle"></i>
+            <button value={index} onClick={this.handleButtonClick}>
               {this.props.buttonText}
             </button>
+          </div>
         ) : (
-          (
           <></>
-        )
         ),
       ];
     });

@@ -12,6 +12,7 @@ import TopMenu from "../components/TopMenu/TopMenu";
 type ScreensRootState = {
   isLoggedIn: boolean;
   currentScreen: JSX.Element;
+  isGoBackVisible: boolean;
 };
 
 type ScreensRootProps = {};
@@ -20,6 +21,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
   state: ScreensRootState = {
     isLoggedIn: false,
     currentScreen: <></>,
+    isGoBackVisible: false,
   };
 
   handleUserAuthenticated = (): void => {
@@ -39,6 +41,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
 
   handleGoBack = (): void => {
     this.setState({
+      isGoBackVisible: false,
       currentScreen: (
         <ScreenUserHome onScreenChoice={this.handleScreenChoice} />
       ),
@@ -59,21 +62,25 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
       case ScreenType[ScreenType.TypeTestResults]:
         this.setState({
           currentScreen: <ScreenTestResults />,
+          isGoBackVisible: true,
         });
         break;
       case ScreenType[ScreenType.TypePrescriptions]:
         this.setState({
           currentScreen: <ScreenPrescriptions />,
+          isGoBackVisible: true,
         });
         break;
       case ScreenType[ScreenType.TypeConsultations]:
         this.setState({
           currentScreen: <ScreenMyConsultations />,
+          isGoBackVisible: true,
         });
         break;
       case ScreenType[ScreenType.TypeCreateConsultation]:
         this.setState({
           currentScreen: <ScreenCreateConsultation />,
+          isGoBackVisible: true,
         });
         break;
       default:
@@ -83,6 +90,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
 
   componentDidMount() {
     this.setState({
+      isGoBackVisible: false,
       currentScreen: (
         <ScreenUserHome onScreenChoice={this.handleScreenChoice} />
       ),
@@ -98,6 +106,7 @@ class ScreensRoot extends React.Component<ScreensRootProps, ScreensRootState> {
           <TopMenu
             onLogOut={this.handleUserLogout}
             onGoBack={this.handleGoBack}
+            isGoBackVisible={this.state.isGoBackVisible}
           />
         )}
         {!isLoggedIn && (
