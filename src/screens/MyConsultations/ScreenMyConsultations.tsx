@@ -21,15 +21,7 @@ export class ScreenMyConsultations extends React.Component<
   ScreenMyConsultationsState
 > {
   state = {
-    visits: [
-      {
-        id: NaN,
-        date: NaN,
-        doctor_id: NaN,
-        specialization: "",
-        doctor_name: "",
-      },
-    ],
+    visits: Array<ReservedConsultation>(),
   };
 
   componentDidMount() {

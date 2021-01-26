@@ -1,12 +1,9 @@
 {
   "Prescriptions": [
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" },
-    { "serial_number": "1242244", "date": "02.01.2021" }
+    { "serialNumber": 5004404, "date": "31.03.2020", "doctor": "Jan Kowalski", "medications": ["Aspiryna", "Witamina C"] },
+    { "serialNumber": 2788126, "date": "30.06.2020", "doctor": "Jan Kowalski", "medications": ["Bufanol"] },
+    { "serialNumber": 7658841, "date": "15.07.2020", "doctor": "Tadeusz Nowak", "medications": ["Tetramozol", "Krople do oczu", "Krople do nosa"] },
+    { "serialNumber": 1031779, "date": "22.10.2020", "doctor": "Jan Kowalski", "medications": ["Aspiryna"] },
+    { "serialNumber": 4433510, "date": "08.01.2021", "doctor": "Bartosz Rydzyk", "medications": ["Witamina C", "Witamina D", "Witamina K", "Witamina B6"] }
   ]
 }
